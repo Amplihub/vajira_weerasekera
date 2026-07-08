@@ -4,7 +4,6 @@ export function HomeHero() {
   return (
     <PageHero
       skySrc={null}
-      animatedBackground={true}
       animateIn={true}
       className="bg-[#eef2fb]"
       eyebrow="Executive Coaching for Senior Leaders"

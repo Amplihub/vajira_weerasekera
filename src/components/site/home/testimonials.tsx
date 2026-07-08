@@ -12,11 +12,11 @@ const LOOP_COUNT = 3;
 export function Testimonials() {
   const [reduceMotion, setReduceMotion] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number | undefined>(undefined);
   
   const isHovered = useRef(false);
   const isPaused = useRef(false);
-  const pauseTimeout = useRef<NodeJS.Timeout>();
+  const pauseTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
   const isDragging = useRef(false);
 
   // Duplicate the array to create a seamless infinite loop
