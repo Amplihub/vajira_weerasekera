@@ -17,7 +17,13 @@ const fmtDate = (d: Date | string) =>
   new Date(d).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" });
 
 export default async function InsightsListPage() {
-  const posts = await storage.getPublishedInsights();
+  let posts: Insight[] = [];
+  try {
+    posts = await storage.getPublishedInsights();
+  } catch (error) {
+    // If the database is unreachable (e.g., Vercel build without env vars), fallback to empty.
+  }
+  
   const [lead, ...rest] = posts;
 
   return (

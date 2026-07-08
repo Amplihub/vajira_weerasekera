@@ -10,13 +10,23 @@ export const revalidate = 3600;
 
 // Pre-render every published article at build time → static pages.
 export async function generateStaticParams() {
-  const posts = await storage.getPublishedInsights();
-  return posts.map((p) => ({ slug: p.slug }));
+  try {
+    const posts = await storage.getPublishedInsights();
+    return posts.map((p) => ({ slug: p.slug }));
+  } catch (error) {
+    // If the database is unreachable (e.g., Vercel build without env vars), skip pre-rendering.
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await storage.getPublishedInsightBySlug(slug);
+  let post;
+  try {
+    post = await storage.getPublishedInsightBySlug(slug);
+  } catch (error) {
+    // If the database is unreachable (e.g., Vercel build without env vars), skip.
+  }
   if (!post) return { title: "Insight not found" };
   return {
     title: `${post.seoTitle || post.title} — Vajira Weerasekera`,
@@ -32,7 +42,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function InsightDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = await storage.getPublishedInsightBySlug(slug);
+  let post;
+  try {
+    post = await storage.getPublishedInsightBySlug(slug);
+  } catch (error) {
+    // If the database is unreachable (e.g., Vercel build without env vars), fall through to notFound().
+  }
   if (!post) notFound();
 
   return (
