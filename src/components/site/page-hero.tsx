@@ -60,9 +60,11 @@ export function PageHero({
   useEffect(() => {
     if (!animateIn || !parallaxRef.current) return;
     
-    // Respect prefers-reduced-motion for parallax
+    // Respect prefers-reduced-motion and small screens for parallax
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mediaQuery.matches) return;
+    // Disable parallax on mobile — too janky on low-powered devices
+    if (window.innerWidth < 768) return;
 
     const onScroll = () => {
       if (!parallaxRef.current) return;
@@ -171,14 +173,14 @@ export function PageHero({
           <div
             ref={parallaxRef}
             className={cn(
-              "relative mx-auto aspect-[815/820] w-full max-w-[280px] sm:max-w-[400px] lg:max-w-[860px]",
+              "relative mx-auto aspect-[815/820] w-full max-w-[200px] sm:max-w-[380px] lg:max-w-[860px]",
               animateIn ? "opacity-0 animate-fade-in-scale [animation-delay:150ms] motion-reduce:animate-none motion-reduce:opacity-100" : "",
               imageWrapClassName,
             )}
           >
-            {/* Decorative Rings (matching Homepage) */}
-            <div className="absolute -inset-6 -z-10 rounded-full border border-blue-500/15" aria-hidden="true" />
-            <div className="absolute -inset-14 -z-10 hidden rounded-full border border-blue-500/10 sm:block" aria-hidden="true" />
+          {/* Decorative Rings (matching Homepage) — hidden on mobile to prevent clipping */}
+            <div className="absolute -inset-6 -z-10 hidden sm:block rounded-full border border-blue-500/15" aria-hidden="true" />
+            <div className="absolute -inset-14 -z-10 hidden sm:block rounded-full border border-blue-500/10" aria-hidden="true" />
 
             {/* Ambient Aurora Background */}
             <div className="absolute inset-0 -z-10 flex items-center justify-center pointer-events-none mix-blend-multiply opacity-60 dark:mix-blend-screen dark:opacity-20">

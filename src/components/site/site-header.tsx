@@ -129,7 +129,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               style={{ transitionDelay: open ? `${120 + i * 70}ms` : "0ms" }}
               className={cn(
-                "flex items-center justify-between rounded-2xl px-2 py-3 text-[2.25rem] font-semibold uppercase leading-none tracking-tight text-slate-900 transition-[opacity,transform,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#0B0F1A]/[0.04]",
+                "flex items-center justify-between rounded-2xl px-2 py-3 text-[1.75rem] sm:text-[2.25rem] font-semibold uppercase leading-none tracking-tight text-slate-900 transition-[opacity,transform,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#0B0F1A]/[0.04]",
                 open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
               )}
             >

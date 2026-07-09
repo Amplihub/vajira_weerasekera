@@ -13,6 +13,8 @@ const LOOP_COUNT = 3;
 
 export function Testimonials() {
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number | undefined>(undefined);
   
@@ -85,8 +87,13 @@ export function Testimonials() {
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduceMotion(mq.matches);
-    
-    if (!mq.matches) {
+
+    // Detect mobile — disable auto-scroll blur system on touch devices
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    if (!mq.matches && !isMobile) {
       // Pause auto-scroll when section is off-screen to save CPU
       const observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
@@ -101,10 +108,12 @@ export function Testimonials() {
       
       return () => {
         observer.disconnect();
+        window.removeEventListener('resize', checkMobile);
         if (requestRef.current) cancelAnimationFrame(requestRef.current);
       };
     }
-  }, [onLoop]);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, [onLoop, isMobile]);
 
   // Handle native scroll event to update focus when manually scrolling (e.g. trackpad/touch)
   useEffect(() => {
@@ -131,6 +140,21 @@ export function Testimonials() {
     }
   }, [reduceMotion, updateFocus]);
 
+  // Track active dot index on mobile via scroll
+  useEffect(() => {
+    if (!isMobile) return;
+    const container = containerRef.current;
+    if (!container) return;
+    const handleScroll = () => {
+      const cardWidth = container.querySelector('.testimonial-card-wrapper')?.getBoundingClientRect().width || container.clientWidth * 0.85;
+      const gap = 16;
+      const index = Math.round(container.scrollLeft / (cardWidth + gap));
+      setActiveIndex(Math.min(index, testimonials.length - 1));
+    };
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [isMobile]);
+
   const handleArrowClick = (dir: 1 | -1) => {
     if (!containerRef.current) return;
     const cardWidth = containerRef.current.querySelector('.testimonial-card-wrapper')?.getBoundingClientRect().width || 480;
@@ -149,8 +173,8 @@ export function Testimonials() {
 
   return (
     <section className="relative bg-white pt-24 pb-40 overflow-hidden">
-      {/* Layer 1: 3D Cube (Animated Background) */}
-      <div className="absolute right-[-10%] top-[2%] w-[500px] md:w-[750px] z-0 pointer-events-none animate-pulse-subtle">
+      {/* Layer 1: 3D Cube (Animated Background) — hidden on mobile */}
+      <div className="absolute right-[-10%] top-[2%] w-[500px] md:w-[750px] z-0 pointer-events-none animate-pulse-subtle hidden md:block">
         <Image
           src="/home/Square.png"
           alt="3D Wireframe Background"
@@ -164,9 +188,9 @@ export function Testimonials() {
       <div className="relative z-10 mx-auto max-w-[1664px] px-6 sm:px-8 lg:px-[128px] mb-32 md:mb-48">
         <div className="max-w-4xl relative z-20 flex flex-col">
           {/* Layer 3: Staggered Headline */}
-          <h2 className="font-sans text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] flex flex-col">
+          <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] flex flex-col">
             <span className="text-slate-900 block">One architecture.</span>
-            <span className="font-serif italic font-normal text-brand-blue block ml-12 md:ml-32">Infinite scale.</span>
+            <span className="font-serif italic font-normal text-brand-blue block md:ml-32">Infinite scale.</span>
           </h2>
           
           {/* Layer 2: Editorial Feature Grid */}
@@ -186,7 +210,7 @@ export function Testimonials() {
             </div>
 
             {/* Column 2: 4 Pillars */}
-            <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
               <div className="border-l border-slate-200 pl-4 flex flex-col">
                 <span className="text-xs font-bold text-blue-600 mb-1">01</span>
                 <span className="text-slate-900 font-semibold font-sans">Strategic Clarity</span>
@@ -225,28 +249,32 @@ export function Testimonials() {
           onTouchStart={() => { isHovered.current = true; }}
           onTouchEnd={() => { isHovered.current = false; }}
         >
-          {/* Edge Fades for smooth entry/exit */}
-          <div className="absolute inset-y-0 left-0 w-[15%] bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-[15%] bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          {/* Edge Fades — hidden on mobile to show full card */}
+          <div className="hidden md:block absolute inset-y-0 left-0 w-[15%] bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="hidden md:block absolute inset-y-0 right-0 w-[15%] bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
           <div
             ref={containerRef}
             className={cn(
               "flex overflow-x-auto [&::-webkit-scrollbar]:hidden py-8",
-              reduceMotion ? "snap-x snap-mandatory px-6 sm:px-[calc(50vw-240px)]" : "cursor-grab active:cursor-grabbing"
+              isMobile
+                ? "snap-x snap-mandatory px-4"
+                : reduceMotion
+                  ? "snap-x snap-mandatory px-6 sm:px-[calc(50vw-240px)]"
+                  : "cursor-grab active:cursor-grabbing"
             )}
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {items.map((t, i) => (
+            {(isMobile ? testimonials : items).map((t, i) => (
               <div 
                 key={`${t.name}-${i}`} 
                 className={cn(
                   "testimonial-card-wrapper shrink-0 mr-4 sm:mr-8",
-                  reduceMotion ? "snap-center" : ""
+                  isMobile ? "snap-center" : reduceMotion ? "snap-center" : ""
                 )}
-                onMouseEnter={() => { hoveredIndexRef.current = i; }}
-                onMouseLeave={() => { if (hoveredIndexRef.current === i) hoveredIndexRef.current = null; }}
-                style={!reduceMotion ? {
+                onMouseEnter={() => { if (!isMobile) hoveredIndexRef.current = i; }}
+                onMouseLeave={() => { if (!isMobile && hoveredIndexRef.current === i) hoveredIndexRef.current = null; }}
+                style={!reduceMotion && !isMobile ? {
                   filter: `blur(var(--card-blur, 0px))`,
                   opacity: `var(--card-opacity, 1)`,
                   transform: `scale(var(--card-scale, 1))`,
@@ -258,10 +286,13 @@ export function Testimonials() {
             ))}
           </div>
 
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows — hover-gated on desktop, always-visible on mobile */}
           <button
             onClick={() => handleArrowClick(-1)}
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 size-12 flex items-center justify-center rounded-full bg-white text-slate-900 shadow-[0_4px_20px_rgba(0,0,0,0.1)] opacity-0 transition-all duration-300 group-hover:opacity-100 hover:!scale-110 hover:shadow-[0_4px_25px_rgba(0,0,0,0.15)] disabled:opacity-0"
+            className={cn(
+              "absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 size-11 sm:size-12 flex items-center justify-center rounded-full bg-white text-slate-900 shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-all duration-300",
+              isMobile ? "opacity-100" : "opacity-0 group-hover:opacity-100 hover:!scale-110"
+            )}
             aria-label="Previous testimonials"
           >
             <ArrowLeft className="size-5" />
@@ -269,12 +300,39 @@ export function Testimonials() {
           
           <button
             onClick={() => handleArrowClick(1)}
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 size-12 flex items-center justify-center rounded-full bg-white text-slate-900 shadow-[0_4px_20px_rgba(0,0,0,0.1)] opacity-0 transition-all duration-300 group-hover:opacity-100 hover:!scale-110 hover:shadow-[0_4px_25px_rgba(0,0,0,0.15)] disabled:opacity-0"
+            className={cn(
+              "absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 size-11 sm:size-12 flex items-center justify-center rounded-full bg-white text-slate-900 shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-all duration-300",
+              isMobile ? "opacity-100" : "opacity-0 group-hover:opacity-100 hover:!scale-110"
+            )}
             aria-label="Next testimonials"
           >
             <ArrowRight className="size-5" />
           </button>
         </div>
+
+        {/* Mobile dot indicators */}
+        {isMobile && (
+          <div className="flex items-center justify-center gap-2 mt-4 pb-2">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Go to testimonial ${i + 1}`}
+                onClick={() => {
+                  const container = containerRef.current;
+                  if (!container) return;
+                  const cardWidth = container.querySelector('.testimonial-card-wrapper')?.getBoundingClientRect().width || container.clientWidth * 0.85;
+                  container.scrollTo({ left: i * (cardWidth + 16), behavior: 'smooth' });
+                }}
+                className={cn(
+                  "rounded-full transition-all duration-300",
+                  activeIndex === i
+                    ? "w-6 h-2 bg-blue-600"
+                    : "w-2 h-2 bg-slate-300 hover:bg-slate-400"
+                )}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
