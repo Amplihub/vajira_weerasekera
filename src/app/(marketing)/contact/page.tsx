@@ -57,7 +57,7 @@ export default function ContactPage() {
               width={800}
               height={800}
               priority
-              className="w-full h-auto object-contain [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] drop-shadow-2xl"
+              className="w-full h-auto object-contain drop-shadow-2xl"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>

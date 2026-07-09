@@ -46,7 +46,7 @@ export default function ExecutiveCoachingPage() {
             alt: "Vajira Weerasekara",
             sizes: "690px",
           }}
-          imageClassName="[mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)]"
+          imageClassName=""
           containerClassName="lg:grid-cols-[1fr_minmax(0,690px)] relative z-10"
         />
       </div>

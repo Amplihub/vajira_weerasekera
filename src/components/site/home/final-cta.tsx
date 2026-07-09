@@ -64,7 +64,7 @@ export function FinalCta() {
             href={BOOK_CALL_HREF}
             className="group mt-10 inline-flex items-center gap-3 rounded-full bg-blue-600 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all duration-300 ease-out hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.4)]"
           >
-            INITIATE THE CONVERSATION
+            BOOK A CALL
             <ArrowRight className="size-5 transition-transform duration-300 ease-out group-hover:translate-x-2" strokeWidth={2.5} />
           </Link>
         </div>

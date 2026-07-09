@@ -28,7 +28,7 @@ export function HomeHero() {
         <div className="absolute bottom-[-10%] right-[-15%] w-[60vw] h-[60vw] rounded-full bg-indigo-300/10 blur-[80px] animate-[mobile-drift-b_18s_ease-in-out_infinite]" />
       </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-16 px-4 sm:px-6 lg:grid-cols-[1.08fr_1fr] lg:gap-12 lg:px-8">
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-16 px-4 sm:px-6 lg:grid-cols-[1fr_1.25fr] lg:gap-8 lg:px-8">
         {/* Left Column: Typography & CTAs — second on mobile, first on desktop */}
         <div className="order-2 lg:order-none relative z-20 flex flex-col items-start justify-center text-left">
           
@@ -39,8 +39,10 @@ export function HomeHero() {
           
           {/* H1 Headline */}
           <h1 className="opacity-0 animate-fade-in-up text-[2.6rem] leading-[1.1] sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-slate-900 [animation-delay:200ms]">
-            Master the noise. Lead with{" "}
-            <span className="font-serif italic font-normal text-blue-600">precision.</span>
+            Master the noise. Lead{" "}
+            <span className="whitespace-nowrap">with{" "}
+              <span className="font-serif italic font-normal text-blue-600">precision.</span>
+            </span>
           </h1>
           
           {/* Subtext */}
@@ -79,7 +81,7 @@ export function HomeHero() {
             // Desktop: revert to the original floating style
             "sm:rounded-none sm:overflow-visible sm:shadow-none sm:border-0 sm:bg-transparent",
             // Sizing
-            "mx-auto max-w-full sm:max-w-lg md:max-w-2xl md:ml-auto lg:mx-0 lg:mt-10",
+            "mx-auto max-w-full sm:max-w-lg md:max-w-2xl lg:max-w-none md:ml-auto lg:mx-0 lg:mt-10",
           ].join(" ")}
         >
 
@@ -124,11 +126,11 @@ export function HomeHero() {
             </div>
           </div>
 
-          {/* ── DESKTOP: original floating photo (unchanged) ─────────────── */}
-          <div className="hidden sm:block relative">
-            {/* Decorative rings */}
+          {/* ── DESKTOP: scaled-up floating photo ─────────────────────── */}
+          <div className="hidden sm:block relative lg:scale-[1.18] lg:origin-right lg:[transform-origin:right_center]">
+            {/* Decorative rings — scale proportionally with the wrapper */}
             <div className="absolute -inset-6 -z-10 rounded-full border border-blue-500/15" aria-hidden="true" />
-            <div className="absolute -inset-14 -z-10 hidden sm:block rounded-full border border-blue-500/10" aria-hidden="true" />
+            <div className="absolute -inset-14 -z-10 rounded-full border border-blue-500/10" aria-hidden="true" />
 
             <Image
               src="/brand/vajira-avatar-zoomed.png"
@@ -136,12 +138,12 @@ export function HomeHero() {
               width={700}
               height={700}
               priority
-              className="object-contain drop-shadow-2xl [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)]"
+              className="object-contain drop-shadow-2xl"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
 
-            {/* Floating proof card — desktop/tablet only */}
-            <div className="hidden sm:flex absolute bottom-10 -left-10 z-20 items-center gap-3 rounded-2xl border border-slate-200 bg-white/90 px-6 py-4 shadow-[0_20px_45px_-20px_rgba(15,23,42,0.25)] backdrop-blur-md">
+            {/* Floating proof card — badge scales with wrapper, offset adjusted for scale */}
+            <div className="hidden sm:flex absolute bottom-10 -left-6 lg:-left-2 z-20 items-center gap-3 rounded-2xl border border-slate-200 bg-white/90 px-6 py-4 shadow-[0_20px_45px_-20px_rgba(15,23,42,0.25)] backdrop-blur-md">
               <span className="font-accent text-3xl italic font-semibold text-blue-600">30+</span>
               <span className="max-w-[7rem] text-xs font-semibold uppercase leading-tight tracking-[0.08em] text-slate-500">
                 Years leading global teams
