@@ -21,9 +21,9 @@ export function HomeHero() {
         <div className="absolute bottom-[-10%] right-[-15%] w-[60vw] h-[60vw] rounded-full bg-indigo-300/10 blur-[80px] animate-[mobile-drift-b_18s_ease-in-out_infinite]" />
       </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-16 px-4 sm:px-6 lg:grid-cols-[1fr_1.25fr] lg:gap-8 lg:px-8 mb-10 md:mb-16">
+      <div className="relative z-10 mx-auto flex flex-col lg:flex-row max-w-7xl items-center gap-8 sm:gap-16 px-4 sm:px-6 lg:gap-8 lg:px-8 mb-10 md:mb-16">
         {/* Left Column: Typography & CTAs — second on mobile, first on desktop */}
-        <div className="order-2 lg:order-none relative z-20 flex flex-col items-start justify-center text-left">
+        <div className="order-2 lg:order-none relative z-20 flex flex-col items-start justify-center text-left lg:w-1/2 flex-shrink">
           
           {/* Eyebrow */}
           <span className="mb-6 block opacity-0 animate-fade-in-up text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-slate-500 [animation-delay:100ms]">
@@ -64,37 +64,52 @@ export function HomeHero() {
           </div>
         </div>
 
-        {/* IMAGE COLUMN REBUILD */}
-        <div className="relative flex items-center justify-center w-full md:w-1/2 mt-2 md:mt-0">
+        {/* RIGHT COLUMN: HERO IMAGE (BULLETPROOF LAYOUT) */}
+        {/* flex-shrink-0 prevents the text column from crushing this column */}
+        <div className="relative w-full lg:w-1/2 flex-shrink-0 flex items-center justify-center lg:justify-end mt-12 lg:mt-0">
 
-          {/* 1. Desktop Decorative Rings (Strictly hidden on mobile) */}
-          <div className="hidden md:block absolute inset-[-15%] rounded-full border border-blue-500/15 animate-ring-pulse z-0 pointer-events-none" aria-hidden="true" />
-          <div className="hidden md:block absolute inset-[-30%] rounded-full border border-blue-500/10 animate-ring-pulse [animation-delay:1.5s] z-0 pointer-events-none" aria-hidden="true" />
+          {/* Master Sizing Container: Fills the column, scales up, and shifts right */}
+          <div className="relative w-full lg:w-full lg:max-w-[650px] xl:max-w-[700px] lg:translate-x-8 xl:translate-x-12 transition-transform duration-700">
 
-          {/* 2. Responsive Image Wrapper */}
-          {/* Mobile: Full width, fixed height, no rounding, bottom fade mask */}
-          {/* Desktop: Max-width, square, fully rounded circle, no mask, shadow */}
-          <div className="relative w-full h-[450px] md:h-auto md:max-w-[530px] md:aspect-square rounded-none md:rounded-full overflow-hidden [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)] md:[mask-image:none] shadow-none md:shadow-2xl md:shadow-slate-200/60 z-10 mx-auto md:scale-[1.18] md:translate-x-12">
-            <Image
-              src="/brand/vajira-avatar-zoomed.png"
-              alt="Vajira Weerasekera"
-              fill
-              priority
-              className="w-full h-full object-cover object-[center_top]"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+            {/* 1. Desktop Decorative Rings & Pulse Glow */}
+            <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full z-0 pointer-events-none">
+
+              {/* Soft pulsing ambient glow behind the image (gives volume to the animation) */}
+              <div className="absolute inset-0 rounded-full bg-blue-100/40 blur-3xl animate-[pulse_4s_ease-in-out_infinite]"></div>
+
+              {/* Ring 1 (Inner): Tighter, more visible border */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[112%] aspect-square rounded-full border-[1.5px] border-slate-300/70 animate-[pulse_3s_ease-in-out_infinite]"></div>
+
+              {/* Ring 2 (Middle): Delayed pulse */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[126%] aspect-square rounded-full border-[1.5px] border-slate-200/70 animate-[pulse_3s_ease-in-out_infinite] [animation-delay:1s]"></div>
+
+              {/* Ring 3 (Outer): Widest ring, furthest delay */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] aspect-square rounded-full border-[1.5px] border-slate-200/40 animate-[pulse_3s_ease-in-out_infinite] [animation-delay:2s]"></div>
+
+            </div>
+
+            {/* 2. Responsive Image Wrapper */}
+            {/* Mobile: 450px tall, edge-to-edge fade. Desktop: Massive fluid circle. */}
+            <div className="relative w-full h-[450px] lg:h-auto lg:aspect-square rounded-none lg:rounded-full overflow-hidden [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] lg:[mask-image:none] shadow-none lg:shadow-2xl lg:shadow-slate-200/60 z-10">
+              <Image
+                src="/brand/vajira-avatar-zoomed.png"
+                alt="Vajira Weerasekera"
+                fill
+                priority
+                className="w-full h-full object-cover object-top"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+
+            {/* 3. The 30+ Years Badge */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:bottom-16 lg:left-[-10%] lg:translate-x-0 z-20 flex items-center gap-3 bg-white/80 backdrop-blur-md rounded-full px-5 py-3 shadow-xl border border-white/50 w-max transform lg:scale-110 origin-bottom-left">
+              <span className="text-blue-600 font-serif italic text-2xl font-bold">30+</span>
+              <span className="text-xs font-bold tracking-widest uppercase text-slate-500 leading-tight">
+                Years Leading<br />Global Teams
+              </span>
+            </div>
+
           </div>
-
-          {/* 3. The 30+ Years Badge */}
-          {/* Mobile: Centered at the bottom of the image */}
-          {/* Desktop: Offset to the bottom-left of the circle */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 md:bottom-12 md:left-[-10%] md:translate-x-0 z-20 flex items-center gap-3 bg-white/70 backdrop-blur-md rounded-full px-5 py-3 shadow-xl border border-white/50 w-max">
-            <span className="font-accent text-xl italic font-semibold text-blue-600">30+</span>
-            <span className="text-[9px] font-bold uppercase leading-tight tracking-[0.08em] text-slate-500">
-              Years Leading<br />Global Teams
-            </span>
-          </div>
-
         </div>
       </div>
 
