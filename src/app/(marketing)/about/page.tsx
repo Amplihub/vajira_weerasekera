@@ -46,8 +46,8 @@ export default function AboutPage() {
             </div>
           </div>
           
-          {/* Right Column: Portrait */}
-          <div className="relative z-10 w-full max-w-[400px] lg:max-w-[550px] aspect-square mx-auto md:ml-auto opacity-0 animate-fade-in-scale [animation-delay:200ms] lg:mx-0 lg:mt-10">
+          {/* Right Column: Portrait — hidden on mobile */}
+          <div className="hidden sm:block relative z-10 w-full max-w-[400px] lg:max-w-[550px] aspect-square mx-auto md:ml-auto opacity-0 animate-fade-in-scale [animation-delay:200ms] lg:mx-0 lg:mt-10">
             {/* Subtle background gradient behind the image area */}
             <div className="absolute inset-0 -z-20 rounded-full bg-gradient-to-tr from-blue-100/40 to-transparent blur-3xl" aria-hidden="true" />
             

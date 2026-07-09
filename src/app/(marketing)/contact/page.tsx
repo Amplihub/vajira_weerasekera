@@ -45,8 +45,8 @@ export default function ContactPage() {
             </div>
           </div>
           
-          {/* Right Column: Portrait Integration */}
-          <div className="relative z-10 w-full max-w-[400px] lg:max-w-lg aspect-square mx-auto md:ml-auto opacity-0 animate-fade-in-scale [animation-delay:200ms] lg:mt-10">
+          {/* Right Column: Portrait — hidden on mobile */}
+          <div className="hidden sm:block relative z-10 w-full max-w-[400px] lg:max-w-lg aspect-square mx-auto md:ml-auto opacity-0 animate-fade-in-scale [animation-delay:200ms] lg:mt-10">
             {/* Decorative rings, matching the homepage hero motif */}
             <div className="absolute -inset-6 -z-10 rounded-full border border-blue-500/15" aria-hidden="true" />
             <div className="absolute -inset-14 -z-10 hidden rounded-full border border-blue-500/10 sm:block" aria-hidden="true" />

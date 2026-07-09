@@ -168,41 +168,43 @@ export function PageHero({
           )}
         </div>
 
-        {/* Portrait */}
+        {/* Portrait — hidden on mobile to avoid cramped circle, visible sm+ */}
         {image && (
-          <div
-            ref={parallaxRef}
-            className={cn(
-              "relative mx-auto aspect-square w-full max-w-[200px] sm:max-w-[380px] lg:max-w-[690px]",
-              animateIn ? "opacity-0 animate-fade-in-scale [animation-delay:150ms] motion-reduce:animate-none motion-reduce:opacity-100" : "",
-              imageWrapClassName,
-            )}
-          >
-          {/* Decorative Rings (matching Homepage) — hidden on mobile to prevent clipping */}
-            <div className="absolute -inset-6 -z-10 hidden sm:block rounded-full border border-blue-500/15" aria-hidden="true" />
-            <div className="absolute -inset-14 -z-10 hidden sm:block rounded-full border border-blue-500/10" aria-hidden="true" />
+          <div className="hidden sm:block">
+            <div
+              ref={parallaxRef}
+              className={cn(
+                "relative mx-auto aspect-square w-full sm:max-w-[380px] lg:max-w-[690px]",
+                animateIn ? "opacity-0 animate-fade-in-scale [animation-delay:150ms] motion-reduce:animate-none motion-reduce:opacity-100" : "",
+                imageWrapClassName,
+              )}
+            >
+              {/* Decorative Rings */}
+              <div className="absolute -inset-6 -z-10 rounded-full border border-blue-500/15" aria-hidden="true" />
+              <div className="absolute -inset-14 -z-10 rounded-full border border-blue-500/10" aria-hidden="true" />
 
-            {/* Ambient Aurora Background */}
-            <div className="absolute inset-0 -z-10 flex items-center justify-center pointer-events-none mix-blend-multiply opacity-60 dark:mix-blend-screen dark:opacity-20">
-              <div 
-                className="absolute w-[70%] h-[70%] rounded-full bg-brand-blue blur-[80px] sm:blur-[120px] motion-reduce:animate-none"
-                style={{ animation: "float-blob 20s infinite ease-in-out" }}
-              />
-              <div 
-                className="absolute w-[60%] h-[60%] rounded-full bg-brand-blue/70 blur-[100px] sm:blur-[140px] motion-reduce:animate-none"
-                style={{ animation: "float-blob 25s infinite ease-in-out reverse", animationDelay: "-5s" }}
-              />
-            </div>
-            
-            <div className="absolute inset-0 rounded-full overflow-hidden shadow-2xl bg-transparent">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                priority={image.priority ?? true}
-                sizes={image.sizes ?? "(max-width: 1024px) 100vw, 815px"}
-                className={cn("object-cover object-[center_top]", imageClassName)}
-              />
+              {/* Ambient Aurora Background */}
+              <div className="absolute inset-0 -z-10 flex items-center justify-center pointer-events-none mix-blend-multiply opacity-60 dark:mix-blend-screen dark:opacity-20">
+                <div 
+                  className="absolute w-[70%] h-[70%] rounded-full bg-brand-blue blur-[80px] sm:blur-[120px] motion-reduce:animate-none"
+                  style={{ animation: "float-blob 20s infinite ease-in-out" }}
+                />
+                <div 
+                  className="absolute w-[60%] h-[60%] rounded-full bg-brand-blue/70 blur-[100px] sm:blur-[140px] motion-reduce:animate-none"
+                  style={{ animation: "float-blob 25s infinite ease-in-out reverse", animationDelay: "-5s" }}
+                />
+              </div>
+              
+              <div className="absolute inset-0 rounded-full overflow-hidden shadow-2xl bg-transparent">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  priority={image.priority ?? true}
+                  sizes={image.sizes ?? "(max-width: 1024px) 100vw, 815px"}
+                  className={cn("object-cover object-[center_top]", imageClassName)}
+                />
+              </div>
             </div>
           </div>
         )}

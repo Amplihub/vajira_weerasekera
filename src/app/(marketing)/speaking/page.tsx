@@ -72,16 +72,17 @@ export default function SpeakingPage() {
               Book a <span className="font-serif italic font-normal text-blue-600">keynote</span> your senior audience will actually use back at work.
             </h1>
           </div>
-          <div className="relative mx-auto mt-12 lg:mt-0 w-[95%] max-w-[450px] aspect-square">
-            {/* Decorative rings — scale proportionally with the wrapper */}
+          {/* ── IMAGE: hidden on mobile, concentric circle on md+ ─────────── */}
+          <div className="hidden md:block relative mx-auto mt-12 lg:mt-0 w-[95%] max-w-[450px] aspect-square">
+            {/* Decorative rings */}
             <div className="absolute -inset-6 -z-10 rounded-full border border-blue-500/15 animate-ring-pulse" aria-hidden="true" />
             <div className="absolute -inset-14 -z-10 rounded-full border border-blue-500/10 animate-ring-pulse [animation-delay:1.5s]" aria-hidden="true" />
-            
-            {/* Circular Image Container */}
-            <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl bg-transparent">
-              <Image 
-                src="/home/speaking-portrait.png" 
-                alt="Vajira speaking" 
+
+            {/* Circular image */}
+            <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl shadow-slate-200/60 bg-transparent">
+              <Image
+                src="/home/speaking-portrait.png"
+                alt="Vajira speaking"
                 fill
                 priority
                 className="object-cover object-top"

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export function HomeHero() {
   return (
-    <section className="relative overflow-hidden bg-slate-50 pt-40 sm:pt-36 lg:pt-44 pb-4 md:pb-8">
+    <section className="relative overflow-hidden bg-slate-50 pt-8 sm:pt-36 lg:pt-44 pb-4 md:pb-8">
       {/* Ambient canvas: soft color wash + fine grain for texture */}
       <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[130px] animate-[pulse_9s_ease-in-out_infinite]" />
       <div className="absolute top-24 right-[-15%] w-[760px] h-[760px] bg-indigo-400/10 rounded-full blur-[150px] animate-[pulse_12s_ease-in-out_infinite_reverse]" />
@@ -64,80 +64,37 @@ export function HomeHero() {
           </div>
         </div>
 
-        {/* Right Column: Portrait — first on mobile (premium frame), second on desktop (floating) */}
-        <div
-          className={[
-            // Ordering
-            "order-1 lg:order-none",
-            // Shared base
-            "relative z-10 w-full opacity-0 animate-fade-in-scale [animation-delay:150ms]",
-            // Desktop: revert to the original floating style
-            "sm:rounded-none sm:overflow-visible sm:shadow-none sm:border-0 sm:bg-transparent",
-            // Sizing
-            "mx-auto max-w-full sm:max-w-lg md:max-w-2xl lg:max-w-none md:ml-auto lg:mx-0 lg:mt-10",
-          ].join(" ")}
-        >
+        {/* IMAGE COLUMN REBUILD */}
+        <div className="relative flex items-center justify-center w-full md:w-1/2 mt-2 md:mt-0">
 
-          {/* ── MOBILE FRAME ONLY ─────────────────────────────────────────── */}
-          {/* Outer floating shadow container */}
-          <div className="sm:hidden relative mx-auto w-[95%] max-w-[380px] aspect-square mt-6 mb-8"
-            style={{ filter: "drop-shadow(0 32px 60px rgba(61,139,242,0.18)) drop-shadow(0 8px 20px rgba(15,23,42,0.10))" }}
-          >
-            {/* Ambient radial glow behind subject's head — z-0 ensures it sits behind image */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full bg-blue-400/20 blur-[50px] pointer-events-none z-0" aria-hidden="true" />
+          {/* 1. Desktop Decorative Rings (Strictly hidden on mobile) */}
+          <div className="hidden md:block absolute inset-[-15%] rounded-full border border-blue-500/15 animate-ring-pulse z-0 pointer-events-none" aria-hidden="true" />
+          <div className="hidden md:block absolute inset-[-30%] rounded-full border border-blue-500/10 animate-ring-pulse [animation-delay:1.5s] z-0 pointer-events-none" aria-hidden="true" />
 
-            {/* Decorative rings — z-0, behind everything */}
-            <div className="absolute -inset-4 rounded-full border border-blue-500/15 pointer-events-none z-0 animate-ring-pulse" aria-hidden="true" />
-            <div className="absolute -inset-8 rounded-full border border-blue-400/10 pointer-events-none z-0 animate-ring-pulse [animation-delay:1.5s]" aria-hidden="true" />
-
-            {/* Frame container: perfect circle */}
-            <div className="relative w-full h-full overflow-hidden rounded-full bg-transparent">
-              <Image
-                src="/brand/vajira-avatar-zoomed.png"
-                alt="Vajira Weerasekera"
-                width={700}
-                height={700}
-                priority
-                className="relative z-10 w-full h-full object-cover object-[center_top]"
-                sizes="(max-width: 640px) 100vw, 50vw"
-              />
-
-              {/* Credential badge — pinned inside bottom-left of frame */}
-              <div className="absolute bottom-4 left-1 sm:left-4 z-20 flex items-center gap-2 rounded-xl border border-white/80 bg-white/85 px-2.5 py-2 shadow-[0_8px_24px_-8px_rgba(15,23,42,0.20)] backdrop-blur-sm">
-                <span className="font-accent text-xl italic font-semibold text-blue-600">30+</span>
-                <span className="text-[9px] font-bold uppercase leading-tight tracking-[0.08em] text-slate-500">
-                  Years leading<br />global teams
-                </span>
-              </div>
-            </div>
+          {/* 2. Responsive Image Wrapper */}
+          {/* Mobile: Full width, fixed height, no rounding, bottom fade mask */}
+          {/* Desktop: Max-width, square, fully rounded circle, no mask, shadow */}
+          <div className="relative w-full h-[450px] md:h-auto md:max-w-[530px] md:aspect-square rounded-none md:rounded-full overflow-hidden [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)] md:[mask-image:none] shadow-none md:shadow-2xl md:shadow-slate-200/60 z-10 mx-auto md:scale-[1.18] md:translate-x-12">
+            <Image
+              src="/brand/vajira-avatar-zoomed.png"
+              alt="Vajira Weerasekera"
+              fill
+              priority
+              className="w-full h-full object-cover object-[center_top]"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
 
-          {/* ── DESKTOP: scaled-up floating photo ─────────────────────── */}
-          <div className="hidden sm:block relative lg:scale-[1.18] lg:origin-right lg:[transform-origin:right_center] w-[95%] max-w-[530px] aspect-square mx-auto lg:mr-0 mt-8 lg:mt-0 lg:translate-x-12">
-            {/* Decorative rings — scale proportionally with the wrapper */}
-            <div className="absolute -inset-6 -z-10 rounded-full border border-blue-500/15 animate-ring-pulse" aria-hidden="true" />
-            <div className="absolute -inset-14 -z-10 rounded-full border border-blue-500/10 animate-ring-pulse [animation-delay:1.5s]" aria-hidden="true" />
-
-            <div className="relative w-full h-full rounded-full overflow-hidden bg-transparent shadow-2xl">
-              <Image
-                src="/brand/vajira-avatar-zoomed.png"
-                alt="Vajira Weerasekera"
-                width={700}
-                height={700}
-                priority
-                className="w-full h-full object-cover object-[center_top]"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-
-            {/* Floating proof card — badge scales with wrapper, offset adjusted for scale */}
-            <div className="hidden sm:flex absolute bottom-8 left-0 lg:bottom-12 lg:left-2 z-20 items-center gap-3 rounded-2xl border border-slate-200 bg-white/90 px-6 py-4 shadow-[0_20px_45px_-20px_rgba(15,23,42,0.25)] backdrop-blur-md">
-              <span className="font-accent text-3xl italic font-semibold text-blue-600">30+</span>
-              <span className="max-w-[7rem] text-xs font-semibold uppercase leading-tight tracking-[0.08em] text-slate-500">
-                Years leading global teams
-              </span>
-            </div>
+          {/* 3. The 30+ Years Badge */}
+          {/* Mobile: Centered at the bottom of the image */}
+          {/* Desktop: Offset to the bottom-left of the circle */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 md:bottom-12 md:left-[-10%] md:translate-x-0 z-20 flex items-center gap-3 bg-white/70 backdrop-blur-md rounded-full px-5 py-3 shadow-xl border border-white/50 w-max">
+            <span className="font-accent text-xl italic font-semibold text-blue-600">30+</span>
+            <span className="text-[9px] font-bold uppercase leading-tight tracking-[0.08em] text-slate-500">
+              Years Leading<br />Global Teams
+            </span>
           </div>
+
         </div>
       </div>
 
