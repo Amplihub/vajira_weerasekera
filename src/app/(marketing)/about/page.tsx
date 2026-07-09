@@ -47,7 +47,7 @@ export default function AboutPage() {
           </div>
           
           {/* Right Column: Portrait */}
-          <div className="relative z-10 w-full max-w-2xl mx-auto md:ml-auto opacity-0 animate-fade-in-scale [animation-delay:200ms] lg:mx-0 lg:mt-10">
+          <div className="relative z-10 w-full max-w-[400px] lg:max-w-[550px] aspect-square mx-auto md:ml-auto opacity-0 animate-fade-in-scale [animation-delay:200ms] lg:mx-0 lg:mt-10">
             {/* Subtle background gradient behind the image area */}
             <div className="absolute inset-0 -z-20 rounded-full bg-gradient-to-tr from-blue-100/40 to-transparent blur-3xl" aria-hidden="true" />
             
@@ -55,15 +55,17 @@ export default function AboutPage() {
             <div className="absolute -inset-6 -z-10 rounded-full border border-blue-500/15" aria-hidden="true" />
             <div className="absolute -inset-14 -z-10 hidden rounded-full border border-blue-500/10 sm:block" aria-hidden="true" />
 
-            <Image
-              src="/home/about-portrait.png"
-              alt="Vajira Weerasekara"
-              width={800}
-              height={800}
-              priority
-              className="w-full h-auto object-contain drop-shadow-2xl"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl bg-transparent">
+              <Image
+                src="/home/about-portrait.png"
+                alt="Vajira Weerasekara"
+                width={800}
+                height={800}
+                priority
+                className="w-full h-full object-cover object-[center_top]"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </section>

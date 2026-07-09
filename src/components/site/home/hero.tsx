@@ -87,39 +87,32 @@ export function HomeHero() {
 
           {/* ── MOBILE FRAME ONLY ─────────────────────────────────────────── */}
           {/* Outer floating shadow container */}
-          <div className="sm:hidden relative mx-3"
+          <div className="sm:hidden relative mx-auto w-[95%] max-w-[380px] aspect-square mt-6 mb-8"
             style={{ filter: "drop-shadow(0 32px 60px rgba(61,139,242,0.18)) drop-shadow(0 8px 20px rgba(15,23,42,0.10))" }}
           >
             {/* Ambient radial glow behind subject's head — z-0 ensures it sits behind image */}
-            <div className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[70%] h-[55%] rounded-full bg-blue-400/20 blur-[50px] pointer-events-none z-0" aria-hidden="true" />
-            <div className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[45%] h-[35%] rounded-full bg-blue-300/15 blur-[35px] pointer-events-none z-0" aria-hidden="true" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full bg-blue-400/20 blur-[50px] pointer-events-none z-0" aria-hidden="true" />
 
             {/* Decorative rings — z-0, behind everything */}
-            <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[85%] aspect-square rounded-full border border-blue-500/15 pointer-events-none z-0" aria-hidden="true" />
-            <div className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[95%] aspect-square rounded-full border border-blue-400/10 pointer-events-none z-0" aria-hidden="true" />
+            <div className="absolute -inset-4 rounded-full border border-blue-500/15 pointer-events-none z-0 animate-ring-pulse" aria-hidden="true" />
+            <div className="absolute -inset-8 rounded-full border border-blue-400/10 pointer-events-none z-0 animate-ring-pulse [animation-delay:1.5s]" aria-hidden="true" />
 
-            {/* Frame container: rounded top, open bottom, gradient border via inset box-shadow */}
-            <div
-              className="relative overflow-hidden rounded-t-[32px] rounded-b-none"
-              style={{
-                background: "linear-gradient(160deg, #eef4ff 0%, #f5f8ff 40%, #f8faff 100%)",
-                boxShadow: "inset 0 0 0 1px rgba(61,139,242,0.25), inset 1px 0 0 rgba(61,139,242,0.15)",
-              }}
-            >
+            {/* Frame container: perfect circle */}
+            <div className="relative w-full h-full overflow-hidden rounded-full bg-transparent">
               <Image
                 src="/brand/vajira-avatar-zoomed.png"
                 alt="Vajira Weerasekera"
                 width={700}
                 height={700}
                 priority
-                className="relative z-10 w-full object-contain [mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]"
+                className="relative z-10 w-full h-full object-cover object-[center_top]"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
 
               {/* Credential badge — pinned inside bottom-left of frame */}
-              <div className="absolute bottom-6 left-4 z-20 flex items-center gap-2.5 rounded-xl border border-white/80 bg-white/85 px-3.5 py-2.5 shadow-[0_8px_24px_-8px_rgba(15,23,42,0.20)] backdrop-blur-sm">
-                <span className="font-accent text-2xl italic font-semibold text-blue-600">30+</span>
-                <span className="text-[10px] font-bold uppercase leading-tight tracking-[0.08em] text-slate-500">
+              <div className="absolute bottom-4 left-1 sm:left-4 z-20 flex items-center gap-2 rounded-xl border border-white/80 bg-white/85 px-2.5 py-2 shadow-[0_8px_24px_-8px_rgba(15,23,42,0.20)] backdrop-blur-sm">
+                <span className="font-accent text-xl italic font-semibold text-blue-600">30+</span>
+                <span className="text-[9px] font-bold uppercase leading-tight tracking-[0.08em] text-slate-500">
                   Years leading<br />global teams
                 </span>
               </div>
@@ -127,23 +120,25 @@ export function HomeHero() {
           </div>
 
           {/* ── DESKTOP: scaled-up floating photo ─────────────────────── */}
-          <div className="hidden sm:block relative lg:scale-[1.18] lg:origin-right lg:[transform-origin:right_center]">
+          <div className="hidden sm:block relative lg:scale-[1.18] lg:origin-right lg:[transform-origin:right_center] w-[95%] max-w-[530px] aspect-square mx-auto lg:mr-0 mt-8 lg:mt-0 lg:translate-x-12">
             {/* Decorative rings — scale proportionally with the wrapper */}
-            <div className="absolute -inset-6 -z-10 rounded-full border border-blue-500/15" aria-hidden="true" />
-            <div className="absolute -inset-14 -z-10 rounded-full border border-blue-500/10" aria-hidden="true" />
+            <div className="absolute -inset-6 -z-10 rounded-full border border-blue-500/15 animate-ring-pulse" aria-hidden="true" />
+            <div className="absolute -inset-14 -z-10 rounded-full border border-blue-500/10 animate-ring-pulse [animation-delay:1.5s]" aria-hidden="true" />
 
-            <Image
-              src="/brand/vajira-avatar-zoomed.png"
-              alt="Vajira Weerasekera"
-              width={700}
-              height={700}
-              priority
-              className="object-contain drop-shadow-2xl"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            <div className="relative w-full h-full rounded-full overflow-hidden bg-transparent shadow-2xl">
+              <Image
+                src="/brand/vajira-avatar-zoomed.png"
+                alt="Vajira Weerasekera"
+                width={700}
+                height={700}
+                priority
+                className="w-full h-full object-cover object-[center_top]"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
 
             {/* Floating proof card — badge scales with wrapper, offset adjusted for scale */}
-            <div className="hidden sm:flex absolute bottom-10 -left-6 lg:-left-2 z-20 items-center gap-3 rounded-2xl border border-slate-200 bg-white/90 px-6 py-4 shadow-[0_20px_45px_-20px_rgba(15,23,42,0.25)] backdrop-blur-md">
+            <div className="hidden sm:flex absolute bottom-8 left-0 lg:bottom-12 lg:left-2 z-20 items-center gap-3 rounded-2xl border border-slate-200 bg-white/90 px-6 py-4 shadow-[0_20px_45px_-20px_rgba(15,23,42,0.25)] backdrop-blur-md">
               <span className="font-accent text-3xl italic font-semibold text-blue-600">30+</span>
               <span className="max-w-[7rem] text-xs font-semibold uppercase leading-tight tracking-[0.08em] text-slate-500">
                 Years leading global teams

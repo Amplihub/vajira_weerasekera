@@ -173,7 +173,7 @@ export function PageHero({
           <div
             ref={parallaxRef}
             className={cn(
-              "relative mx-auto aspect-[815/820] w-full max-w-[200px] sm:max-w-[380px] lg:max-w-[860px]",
+              "relative mx-auto aspect-square w-full max-w-[200px] sm:max-w-[380px] lg:max-w-[690px]",
               animateIn ? "opacity-0 animate-fade-in-scale [animation-delay:150ms] motion-reduce:animate-none motion-reduce:opacity-100" : "",
               imageWrapClassName,
             )}
@@ -193,14 +193,17 @@ export function PageHero({
                 style={{ animation: "float-blob 25s infinite ease-in-out reverse", animationDelay: "-5s" }}
               />
             </div>
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              priority={image.priority ?? true}
-              sizes={image.sizes ?? "(max-width: 1024px) 100vw, 815px"}
-              className={cn("object-contain", imageClassName)}
-            />
+            
+            <div className="absolute inset-0 rounded-full overflow-hidden shadow-2xl bg-transparent">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                priority={image.priority ?? true}
+                sizes={image.sizes ?? "(max-width: 1024px) 100vw, 815px"}
+                className={cn("object-cover object-[center_top]", imageClassName)}
+              />
+            </div>
           </div>
         )}
       </div>

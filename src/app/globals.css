@@ -239,6 +239,13 @@
     0%, 100% { box-shadow: 0 0 10px 0px rgba(61, 139, 242, 0.2); }
     50% { box-shadow: 0 0 25px 4px rgba(61, 139, 242, 0.45); }
   }
+  @keyframes ring-pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.03); opacity: 1; }
+  }
+  .animate-ring-pulse {
+    animation: ring-pulse-glow 4s ease-in-out infinite;
+  }
   @keyframes nudge-cta {
     0%, 100% { transform: translateX(0); }
     50% { transform: translateX(3px); }
