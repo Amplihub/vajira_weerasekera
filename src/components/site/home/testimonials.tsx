@@ -173,16 +173,7 @@ export function Testimonials() {
 
   return (
     <section className="relative bg-white pt-24 pb-40 overflow-hidden">
-      {/* Layer 1: 3D Cube (Animated Background) — hidden on mobile */}
-      <div className="absolute right-[-10%] top-[2%] w-[500px] md:w-[750px] z-0 pointer-events-none animate-pulse-subtle hidden md:block">
-        <Image
-          src="/home/Square.png"
-          alt="3D Wireframe Background"
-          width={800}
-          height={800}
-          className="w-full h-auto opacity-90"
-        />
-      </div>
+
 
       {/* Layer 3 & 2: Staggered Headline and Overlapping Glass Card */}
       <div className="relative z-10 mx-auto max-w-[1664px] px-6 sm:px-8 lg:px-[128px] mb-32 md:mb-48">

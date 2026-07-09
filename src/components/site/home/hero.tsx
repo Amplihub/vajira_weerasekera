@@ -2,16 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-const LOGOS = [
-  { src: "/home/logos/harvard.png", alt: "Harvard Business School", h: "h-[40px] sm:h-[48px] md:h-[52px]" },
-  { src: "/home/logos/ucd.png", alt: "University College Dublin", h: "h-[40px] sm:h-[48px] md:h-[52px]" },
-  { src: "/home/logos/microsoft-logo-png-2396.png", alt: "Microsoft", h: "h-[32px] sm:h-[36px] md:h-[40px]" },
-  { src: "/home/logos/red-hat-seeklogo.png", alt: "Red Hat", h: "h-[32px] sm:h-[36px] md:h-[40px]" },
-];
-
 export function HomeHero() {
   return (
-    <section className="relative overflow-hidden bg-slate-50 pt-40 sm:pt-36 lg:pt-44 pb-0">
+    <section className="relative overflow-hidden bg-slate-50 pt-40 sm:pt-36 lg:pt-44 pb-4 md:pb-8">
       {/* Ambient canvas: soft color wash + fine grain for texture */}
       <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[130px] animate-[pulse_9s_ease-in-out_infinite]" />
       <div className="absolute top-24 right-[-15%] w-[760px] h-[760px] bg-indigo-400/10 rounded-full blur-[150px] animate-[pulse_12s_ease-in-out_infinite_reverse]" />
@@ -28,7 +21,7 @@ export function HomeHero() {
         <div className="absolute bottom-[-10%] right-[-15%] w-[60vw] h-[60vw] rounded-full bg-indigo-300/10 blur-[80px] animate-[mobile-drift-b_18s_ease-in-out_infinite]" />
       </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-16 px-4 sm:px-6 lg:grid-cols-[1fr_1.25fr] lg:gap-8 lg:px-8">
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 sm:gap-16 px-4 sm:px-6 lg:grid-cols-[1fr_1.25fr] lg:gap-8 lg:px-8 mb-10 md:mb-16">
         {/* Left Column: Typography & CTAs — second on mobile, first on desktop */}
         <div className="order-2 lg:order-none relative z-20 flex flex-col items-start justify-center text-left">
           
@@ -148,50 +141,6 @@ export function HomeHero() {
         </div>
       </div>
 
-      {/* Credibility — Trust Bar */}
-      <div className="relative z-10 mt-16 sm:mt-20 border-t border-slate-200/70 pt-10 pb-10 sm:pt-16 sm:pb-16 md:mt-28 md:pt-20 md:pb-20">
-        <p className="text-[13px] font-semibold tracking-[0.2em] uppercase text-blue-600 text-center mb-6 sm:mb-10 md:mb-14 opacity-0 animate-fade-in-up [animation-delay:500ms]">
-          TRUSTED BY LEADERS FROM
-        </p>
-
-        {/* Mobile: single-line looping marquee */}
-        <div className="sm:hidden overflow-hidden relative">
-          {/* Left/right edge fades */}
-          <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
-          <div className="flex w-max animate-marquee items-center gap-12 motion-reduce:animate-none">
-            {[...LOGOS, ...LOGOS].map((logo, index) => (
-              <div key={index} className="shrink-0 flex items-center justify-center">
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className={`w-auto object-contain opacity-50 grayscale ${logo.h}`}
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Desktop: static grid */}
-        <div className="hidden sm:flex flex-wrap items-center justify-center gap-16 md:gap-20 px-6">
-          {LOGOS.map((logo, index) => (
-            <div
-              key={logo.alt}
-              className="flex items-center justify-center opacity-0 animate-fade-in-up"
-              style={{ animationDelay: `${600 + index * 100}ms` }}
-            >
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                className={`w-auto object-contain animate-logo-spotlight ${logo.h}`}
-                style={{ animationDelay: `${index * 3}s` }}
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }
