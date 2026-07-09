@@ -12,12 +12,12 @@ function LinkedInIcon({ className }: { className?: string }) {
 
 function FooterColumn({ title, links }: { title: string; links: readonly { label: string; href: string }[] }) {
   return (
-    <div className="flex flex-1 flex-col gap-8 sm:gap-14">
-      <h4 className="font-heading text-xl font-semibold uppercase text-brand-navy">{title}</h4>
-      <ul className="flex flex-col gap-6 text-sm uppercase tracking-[0.1px] text-brand-ink/70">
+    <div className="col-span-1 lg:col-span-2">
+      <h4 className="text-xs font-semibold tracking-[0.2em] uppercase text-slate-500 mb-6">{title}</h4>
+      <ul className="flex flex-col">
         {links.map((l) => (
           <li key={l.href + l.label}>
-            <Link href={l.href} className="transition-colors hover:text-brand-navy">
+            <Link href={l.href} className="group text-slate-300 hover:text-white transition-colors duration-300 py-2 block w-max">
               {l.label}
             </Link>
           </li>
@@ -29,45 +29,64 @@ function FooterColumn({ title, links }: { title: string; links: readonly { label
 
 export function SiteFooter() {
   return (
-    <footer className="bg-brand-bg">
-      <div className="mx-auto flex max-w-[1536px] flex-col gap-16 px-6 py-24 sm:px-12 lg:flex-row lg:justify-between lg:px-[236px] lg:py-[200px]">
-        {/* Brand */}
-        <div className="flex max-w-[515px] flex-col gap-12">
-          <div className="flex flex-col gap-10">
-            <Image src="/brand/logo-footer.svg" alt="Vajira Weerasekara" width={149} height={60} />
-            <p className="font-heading text-xl font-normal text-brand-ink/70">
+    <footer className="bg-slate-950 py-20 lg:py-32 border-t border-white/10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
+          
+          {/* Left Column (Brand & Bio) */}
+          <div className="col-span-1 lg:col-span-5">
+            <Link href="/" className="inline-block">
+              <Image 
+                src="/brand/logo-footer.svg" 
+                alt="Vajira Weerasekara" 
+                width={149} 
+                height={60} 
+                className="brightness-0 invert" 
+              />
+            </Link>
+            
+            <p className="text-slate-400 text-lg leading-relaxed max-w-sm mt-8">
               Executive Coach, Keynote Speaker &amp; Leadership Advisor. Helping senior leaders create clarity,
               energize teams, and deliver results.
             </p>
+            
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="border border-white/20 rounded-full p-3 mt-8 text-white hover:bg-blue-600 hover:border-transparent transition-all duration-300 inline-block"
+            >
+              <LinkedInIcon className="size-5" />
+            </a>
           </div>
-          <a
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="text-brand-navy transition-opacity hover:opacity-70"
-          >
-            <LinkedInIcon className="size-8" />
-          </a>
+
+          {/* Spacer column to push links right */}
+          <div className="hidden lg:block lg:col-span-1"></div>
+
+          {/* Right Columns (Links) */}
+          <FooterColumn title="SERVICES" links={servicesNav} />
+          <FooterColumn title="COMPANY" links={companyNav} />
+          <FooterColumn title="LEGAL" links={legalNav} />
+          
         </div>
 
-        {/* Link columns */}
-        <div className="grid grid-cols-2 gap-10 sm:flex sm:max-w-[700px] sm:flex-1 sm:gap-8">
-          <FooterColumn title="Services" links={servicesNav} />
-          <FooterColumn title="Company" links={companyNav} />
-          <FooterColumn title="Legal" links={legalNav} />
-        </div>
-      </div>
+        {/* Bottom Bar */}
+        <div className="border-t border-white/10 mt-20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 gap-4">
+          
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-center md:text-left">
+            <p>
+              © {new Date().getFullYear()} Vajira Weerasekara. All rights reserved.
+            </p>
+          </div>
 
-      {/* Bottom bar */}
-      <div className="flex flex-col items-center justify-center gap-2 bg-brand-navy px-12 py-8 sm:flex-row sm:gap-4">
-        <p className="text-center text-sm tracking-[0.25px] text-brand-bg">
-          © {new Date().getFullYear()} Vajira Weerasekara. All rights reserved.
-        </p>
-        <span className="hidden text-brand-bg/30 sm:inline">·</span>
-        <Link href="/admin" className="text-sm tracking-[0.25px] text-brand-bg/70 transition-colors hover:text-brand-bg">
-          Admin
-        </Link>
+          <Link href="/admin" className="hover:text-white transition-colors duration-300">
+            Admin
+          </Link>
+          
+        </div>
+
       </div>
     </footer>
   );

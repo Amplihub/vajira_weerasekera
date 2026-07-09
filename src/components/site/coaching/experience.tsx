@@ -25,10 +25,6 @@ const stats: Stat[] = [
     body: "Former Microsoft CTO Asia and VP, Office of Technology APAC at Red Hat.",
   },
   {
-    stat: "400+",
-    body: "400+ specialists leading global technology organisations across the US, EMEA, and Asia.",
-  },
-  {
     stat: "Office 365",
     body: "Launched Office 365 in Asia, founded Microsoft's IoT Centre of Excellence for Asia, and established Red Hat's first AI team in Asia Pacific.",
   },
@@ -36,31 +32,25 @@ const stats: Stat[] = [
 
 export function CoachingExperience() {
   return (
-    <section className="relative overflow-hidden bg-brand-navy">
+    <section className="relative overflow-hidden bg-slate-950">
       <DecorRings height={900} color="#3D8BF2" rightOnly />
 
-      <div className="relative mx-auto flex max-w-[1664px] flex-col gap-12 px-6 py-20 sm:px-8 lg:px-[128px] lg:py-[120px]">
-        <div className="flex flex-col gap-4">
-          <h2 className="font-heading text-4xl font-semibold leading-[1.1] tracking-[-0.5px] sm:text-5xl">
-            <span className="text-white">Leadership</span>{" "}
-            <span className="text-white/50">Experience</span>
+      <div className="relative mx-auto flex max-w-[1664px] flex-col gap-24 px-6 sm:px-8 lg:px-[128px] py-24 md:py-32">
+        <div className="flex flex-col gap-6">
+          <h2 className="font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
+            <span className="text-white">Leadership Experience</span>
           </h2>
-          <p className="max-w-md text-base leading-7 text-white/70">
-            Leaders engage with me in different ways depending on how much depth
-            they need. All three are confidential, one-on-one, and built around
-            your situation - not a curriculum.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 rounded-2xl border border-white/10 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-white/10">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-3 lg:gap-16">
           {stats.map((s, i) => (
-            <div key={i} className="flex flex-col gap-5 p-8">
+            <div key={i} className="flex flex-col">
               {s.stat ? (
-                <span className="font-heading text-4xl font-medium text-white">
+                <span className="font-sans text-5xl md:text-7xl font-extrabold text-white tracking-tight">
                   {s.stat}
                 </span>
               ) : (
-                <span className="flex h-9 items-center gap-4">
+                <span className="flex h-[4.5rem] md:h-[6rem] items-center gap-6">
                   {s.logos?.map((l) => (
                     <Image
                       key={l.alt}
@@ -69,12 +59,12 @@ export function CoachingExperience() {
                       width={l.w}
                       height={l.h}
                       style={{ width: "auto", height: "auto" }}
-                      className="max-h-7 object-contain"
+                      className="max-h-8 md:max-h-12 object-contain"
                     />
                   ))}
                 </span>
               )}
-              <p className="text-sm leading-6 text-white/60">{s.body}</p>
+              <p className="mt-6 text-xs tracking-[0.2em] uppercase leading-relaxed text-slate-400 font-semibold">{s.body}</p>
             </div>
           ))}
         </div>

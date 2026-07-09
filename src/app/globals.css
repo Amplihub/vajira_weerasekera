@@ -8,10 +8,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans-var), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-sans-var), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sans-var), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-serif-var), ui-serif, Georgia, serif;
+  --font-accent: var(--font-serif-var), ui-serif, Georgia, serif;
 
   /* ── Brand tokens (from Figma) ── */
   --color-brand-navy: #081640;
@@ -149,6 +151,12 @@
 }
 
 @layer utilities {
+  /* Reserved for the ~4 headline emphasis words on the homepage — see AGENTS notes in each home/* component. */
+  .font-accent {
+    font-family: var(--font-accent);
+    font-style: italic;
+  }
+
   /* Soft techy ambient backdrop for admin + token pages */
   .bg-brand-mesh {
     background-color: #fcfdff;
@@ -241,25 +249,35 @@
     66% { transform: translate(-20px, 20px) scale(0.9); opacity: 0.4; }
     100% { transform: translate(0px, 0px) scale(1); opacity: 0.3; }
   }
-  @keyframes pulse-button {
-    0%, 100% { 
-      transform: scale(1);
-      box-shadow: 0 0 0px 0px rgba(8, 22, 64, 0); 
-    }
-    50% { 
-      transform: scale(1.02);
-      box-shadow: 0 0 20px 2px rgba(8, 22, 64, 0.2); 
-    }
-  }
-  .animate-pulse-button {
-    animation: pulse-button 3s infinite ease-in-out;
-  }
   @keyframes bounce-diagonal {
     0%, 100% { transform: translate(0px, 0px); }
     50% { transform: translate(3px, -3px); }
   }
   .animate-bounce-diagonal {
     animation: bounce-diagonal 2s infinite ease-in-out;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  @keyframes shimmer-sweep {
+    0% { transform: translateX(-140%) skewX(-12deg); }
+    100% { transform: translateX(420%) skewX(-12deg); }
+  }
+  .animate-shimmer-sweep {
+    animation: shimmer-sweep 5s ease-in-out infinite;
+  }
+  @keyframes logo-spotlight {
+    0%, 100% { opacity: 0.4; filter: grayscale(100%); transform: scale(1); }
+    10% { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
+    20% { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
+    30%, 90% { opacity: 0.4; filter: grayscale(100%); transform: scale(1); }
+  }
+  .animate-logo-spotlight {
+    animation: logo-spotlight 12s cubic-bezier(0.4, 0, 0.2, 1) infinite forwards;
   }
 
   /* Scoped Hero Button Micro-interactions */

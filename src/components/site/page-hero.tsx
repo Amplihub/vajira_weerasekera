@@ -99,16 +99,16 @@ export function PageHero({
 
       <div
         className={cn(
-          "relative mx-auto grid max-w-[1664px] items-center gap-12 px-6 sm:px-8 pt-30",
+          "relative mx-auto grid max-w-[1664px] items-center gap-8 lg:gap-12 px-6 sm:px-8 pt-24 lg:pt-30",
           image ? "lg:grid-cols-[1fr_minmax(0,860px)]" : "",
           containerClassName,
         )}
       >
         {/* Text */}
         <div
-          className={cn("flex flex-col items-start gap-10 relative z-10 lg:py-12", contentClassName)}
+          className={cn("flex flex-col items-start gap-6 lg:gap-10 relative z-10 lg:py-12", contentClassName)}
         >
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-4 lg:gap-5">
             {eyebrow && (
               <span
                 className={cn(
@@ -124,7 +124,7 @@ export function PageHero({
             <div className="flex flex-col gap-6">
               <h1
                 className={cn(
-                  "font-heading text-[2.75rem] font-semibold leading-none tracking-[-1.5px] text-brand-ink sm:text-5xl lg:text-[60px]",
+                  "font-heading text-4xl leading-[1.1] sm:text-[2.5rem] lg:text-[60px] font-semibold lg:leading-none tracking-[-1px] lg:tracking-[-1.5px] text-brand-ink",
                   // No animClass here since the title itself handles the word stagger
                   titleClassName,
                 )}
@@ -134,7 +134,7 @@ export function PageHero({
               {subtext && (
                 <p
                   className={cn(
-                    "max-w-2xl text-base leading-7 text-brand-ink/70",
+                    "max-w-2xl text-[15px] sm:text-base leading-relaxed lg:leading-7 text-brand-ink/70",
                     animClass,
                     "[animation-delay:200ms]",
                     subtextClassName,
@@ -148,7 +148,7 @@ export function PageHero({
           {ctas && ctas.length > 0 && (
             <div
               className={cn(
-                "flex flex-col gap-3 sm:flex-row mt-2",
+                "flex flex-row flex-wrap items-center gap-3 mt-2",
                 animateIn ? "hero-cta-group opacity-0 animate-fade-in-up [animation-delay:300ms] motion-reduce:animate-none motion-reduce:opacity-100" : "",
                 ctasClassName
               )}
@@ -171,11 +171,15 @@ export function PageHero({
           <div
             ref={parallaxRef}
             className={cn(
-              "relative mx-auto aspect-[815/820] w-full max-w-[860px]",
+              "relative mx-auto aspect-[815/820] w-full max-w-[280px] sm:max-w-[400px] lg:max-w-[860px]",
               animateIn ? "opacity-0 animate-fade-in-scale [animation-delay:150ms] motion-reduce:animate-none motion-reduce:opacity-100" : "",
               imageWrapClassName,
             )}
           >
+            {/* Decorative Rings (matching Homepage) */}
+            <div className="absolute -inset-6 -z-10 rounded-full border border-blue-500/15" aria-hidden="true" />
+            <div className="absolute -inset-14 -z-10 hidden rounded-full border border-blue-500/10 sm:block" aria-hidden="true" />
+
             {/* Ambient Aurora Background */}
             <div className="absolute inset-0 -z-10 flex items-center justify-center pointer-events-none mix-blend-multiply opacity-60 dark:mix-blend-screen dark:opacity-20">
               <div 

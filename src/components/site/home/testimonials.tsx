@@ -5,6 +5,8 @@ import { testimonials } from "@/lib/testimonials";
 import { TestimonialCard } from "@/components/site/testimonial-card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import Image from "next/image";
 
 const SCROLL_SPEED = 0.5; // pixels per frame
 const LOOP_COUNT = 3; 
@@ -18,6 +20,7 @@ export function Testimonials() {
   const isPaused = useRef(false);
   const pauseTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
   const isDragging = useRef(false);
+  const hoveredIndexRef = useRef<number | null>(null);
 
   // Duplicate the array to create a seamless infinite loop
   const items = Array(LOOP_COUNT).fill(testimonials).flat();
@@ -26,21 +29,37 @@ export function Testimonials() {
     if (!containerRef.current || reduceMotion) return;
     const cards = containerRef.current.querySelectorAll('.testimonial-card-wrapper') as NodeListOf<HTMLElement>;
     const centerLine = window.innerWidth / 2;
+    const hoveredIdx = hoveredIndexRef.current;
+    const isActivelyScrolling = !isHovered.current && !isPaused.current && !isDragging.current;
 
-    cards.forEach((card) => {
-      const rect = card.getBoundingClientRect();
-      const cardCenter = rect.left + rect.width / 2;
-      const dist = Math.abs(centerLine - cardCenter);
+    cards.forEach((card, idx) => {
+      let factor;
       
-      // Calculate focus factor: 0 is center, 1 is far edge
-      const maxDist = 450; 
-      const factor = Math.min(dist / maxDist, 1);
+      if (hoveredIdx !== null) {
+        // Individual card focus mode
+        factor = (idx === hoveredIdx) ? 0 : 1;
+        if (idx === hoveredIdx) {
+          card.style.setProperty('--card-scale', `1.02`);
+        } else {
+          card.style.setProperty('--card-scale', `${1 - (factor * 0.05)}`);
+        }
+      } else {
+        // Default distance-based focus
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(centerLine - cardCenter);
+        const maxDist = 450; 
+        factor = Math.min(dist / maxDist, 1);
+        card.style.setProperty('--card-scale', `${1 - (factor * 0.05)}`);
+      }
       
-      // Map to CSS variables for smooth transition
+      card.style.transitionProperty = 'filter, opacity, transform';
+      card.style.transitionDuration = isActivelyScrolling ? '50ms' : '350ms';
+      card.style.transitionTimingFunction = isActivelyScrolling ? 'linear' : 'ease-out';
+      
       card.style.setProperty('--card-blur', `${factor * 2.5}px`);
       card.style.setProperty('--card-opacity', `${1 - (factor * 0.55)}`);
       card.style.setProperty('--card-grayscale', `${factor}`);
-      card.style.setProperty('--card-scale', `${1 - (factor * 0.05)}`);
     });
   }, [reduceMotion]);
 
@@ -129,12 +148,72 @@ export function Testimonials() {
   };
 
   return (
-    <section className="bg-brand-navy overflow-hidden">
-      <div className="mx-auto flex flex-col gap-12 py-20 lg:py-[140px]">
+    <section className="relative bg-white pt-24 pb-40 overflow-hidden">
+      {/* Layer 1: 3D Cube (Animated Background) */}
+      <div className="absolute right-[-10%] top-[2%] w-[500px] md:w-[750px] z-0 pointer-events-none animate-pulse-subtle">
+        <Image
+          src="/home/Square.png"
+          alt="3D Wireframe Background"
+          width={800}
+          height={800}
+          className="w-full h-auto opacity-90"
+        />
+      </div>
+
+      {/* Layer 3 & 2: Staggered Headline and Overlapping Glass Card */}
+      <div className="relative z-10 mx-auto max-w-[1664px] px-6 sm:px-8 lg:px-[128px] mb-32 md:mb-48">
+        <div className="max-w-4xl relative z-20 flex flex-col">
+          {/* Layer 3: Staggered Headline */}
+          <h2 className="font-sans text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] flex flex-col">
+            <span className="text-slate-900 block">One architecture.</span>
+            <span className="font-serif italic font-normal text-brand-blue block ml-12 md:ml-32">Infinite scale.</span>
+          </h2>
+          
+          {/* Layer 2: Editorial Feature Grid */}
+          <div className="relative z-10 max-w-3xl mt-12 md:mt-24 md:ml-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:items-center">
+            {/* Column 1: Summary & CTA */}
+            <div className="flex flex-col gap-8">
+              <p className="text-lg text-slate-500 leading-relaxed font-sans">
+                A single, battle-tested methodology applied across every engagement. From private advisory to full-scale organizational transformation.
+              </p>
+              <Link
+                href="/speaking"
+                className="group inline-flex items-center gap-2 text-brand-blue font-sans font-semibold w-fit transition-colors hover:text-blue-700"
+              >
+                Explore the methodology
+                <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.5} />
+              </Link>
+            </div>
+
+            {/* Column 2: 4 Pillars */}
+            <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+              <div className="border-l border-slate-200 pl-4 flex flex-col">
+                <span className="text-xs font-bold text-blue-600 mb-1">01</span>
+                <span className="text-slate-900 font-semibold font-sans">Strategic Clarity</span>
+              </div>
+              <div className="border-l border-slate-200 pl-4 flex flex-col">
+                <span className="text-xs font-bold text-blue-600 mb-1">02</span>
+                <span className="text-slate-900 font-semibold font-sans">Relentless Execution</span>
+              </div>
+              <div className="border-l border-slate-200 pl-4 flex flex-col">
+                <span className="text-xs font-bold text-blue-600 mb-1">03</span>
+                <span className="text-slate-900 font-semibold font-sans">Radical Alignment</span>
+              </div>
+              <div className="border-l border-slate-200 pl-4 flex flex-col">
+                <span className="text-xs font-bold text-blue-600 mb-1">04</span>
+                <span className="text-slate-900 font-semibold font-sans">Compounding Impact</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* The Testimonials Flow (Bottom) */}
+      <div className="mx-auto flex flex-col gap-12 relative z-10">
         {/* Header container */}
-        <div className="px-6 sm:px-10 lg:px-[128px] max-w-[1664px] mx-auto w-full">
-          <h2 className="max-w-[760px] font-heading text-4xl font-semibold leading-[1.12] tracking-[-0.5px] text-brand-bg sm:text-5xl antialiased">
-            <span className="text-brand-blue">Trusted</span>{" "}by leaders who&apos;ve worked with him
+        <div className="px-6 sm:px-10 lg:px-[128px] max-w-[1664px] mx-auto w-full text-center flex flex-col items-center">
+          <h2 className="max-w-[760px] font-sans text-4xl font-bold leading-[1.18] tracking-tight text-slate-900 sm:text-5xl antialiased">
+            <span className="font-serif italic font-normal text-blue-600">Proven</span>{" "}at the highest levels of leadership.
           </h2>
         </div>
 
@@ -147,8 +226,8 @@ export function Testimonials() {
           onTouchEnd={() => { isHovered.current = false; }}
         >
           {/* Edge Fades for smooth entry/exit */}
-          <div className="absolute inset-y-0 left-0 w-[15%] bg-gradient-to-r from-brand-navy to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-[15%] bg-gradient-to-l from-brand-navy to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-[15%] bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-[15%] bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
           <div
             ref={containerRef}
@@ -162,9 +241,11 @@ export function Testimonials() {
               <div 
                 key={`${t.name}-${i}`} 
                 className={cn(
-                  "testimonial-card-wrapper shrink-0 transition-[filter,opacity,transform] duration-[50ms] ease-linear mr-4 sm:mr-8",
+                  "testimonial-card-wrapper shrink-0 mr-4 sm:mr-8",
                   reduceMotion ? "snap-center" : ""
                 )}
+                onMouseEnter={() => { hoveredIndexRef.current = i; }}
+                onMouseLeave={() => { if (hoveredIndexRef.current === i) hoveredIndexRef.current = null; }}
                 style={!reduceMotion ? {
                   filter: `blur(var(--card-blur, 0px))`,
                   opacity: `var(--card-opacity, 1)`,
@@ -177,25 +258,22 @@ export function Testimonials() {
             ))}
           </div>
 
-          {/* Controls */}
-          <div className="mt-8 flex items-center justify-center gap-4 px-6 relative z-20">
-            <button
-              type="button"
-              onClick={() => handleArrowClick(-1)}
-              aria-label="Previous testimonial"
-              className="flex size-14 items-center justify-center rounded-full bg-brand-blue/15 text-brand-bg transition-colors hover:bg-brand-blue"
-            >
-              <ArrowLeft className="size-5" strokeWidth={2} />
-            </button>
-            <button
-              type="button"
-              onClick={() => handleArrowClick(1)}
-              aria-label="Next testimonial"
-              className="flex size-14 items-center justify-center rounded-full bg-brand-blue/15 text-brand-bg transition-colors hover:bg-brand-blue"
-            >
-              <ArrowRight className="size-5" strokeWidth={2} />
-            </button>
-          </div>
+          {/* Navigation Arrows */}
+          <button
+            onClick={() => handleArrowClick(-1)}
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 size-12 flex items-center justify-center rounded-full bg-white text-slate-900 shadow-[0_4px_20px_rgba(0,0,0,0.1)] opacity-0 transition-all duration-300 group-hover:opacity-100 hover:!scale-110 hover:shadow-[0_4px_25px_rgba(0,0,0,0.15)] disabled:opacity-0"
+            aria-label="Previous testimonials"
+          >
+            <ArrowLeft className="size-5" />
+          </button>
+          
+          <button
+            onClick={() => handleArrowClick(1)}
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 size-12 flex items-center justify-center rounded-full bg-white text-slate-900 shadow-[0_4px_20px_rgba(0,0,0,0.1)] opacity-0 transition-all duration-300 group-hover:opacity-100 hover:!scale-110 hover:shadow-[0_4px_25px_rgba(0,0,0,0.15)] disabled:opacity-0"
+            aria-label="Next testimonials"
+          >
+            <ArrowRight className="size-5" />
+          </button>
         </div>
       </div>
     </section>

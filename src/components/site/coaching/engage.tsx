@@ -57,66 +57,65 @@ const tiers: Tier[] = [
 
 export function CoachingEngage() {
   return (
-    <section className="bg-brand-bg">
-      <div className="mx-auto flex max-w-[1664px] flex-col gap-14 px-6 py-20 sm:px-8 lg:px-[128px] lg:py-[140px]">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <h2 className="font-heading text-4xl font-semibold leading-[1.1] tracking-[-0.5px] sm:text-5xl">
-            <span className="text-brand-blue">Three ways to engage.</span>
-            <br />
-            <span className="text-brand-ink">Pick the depth that fits.</span>
+    <section className="bg-transparent py-20 md:py-32 border-t border-slate-200/50">
+      <div className="mx-auto flex max-w-[1664px] flex-col px-6 sm:px-8 lg:px-[128px]">
+        <div className="flex flex-col gap-6 text-left max-w-2xl mb-16">
+          <h2 className="font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl text-slate-900">
+            Three ways to engage.<br/>
+            Pick the depth that fits.
           </h2>
-          <p className="max-w-md text-base leading-7 text-brand-ink/70">
+          <p className="text-lg text-slate-600 leading-relaxed">
             Leaders engage with me in different ways depending on how much depth they need. All three are confidential,
-            one-on-one, and built around your situation - not a curriculum.
+            one-on-one, and built around your situation — not a curriculum.
           </p>
         </div>
 
-        <div className="grid items-stretch gap-8 lg:grid-cols-3">
-          {tiers.map((t) => (
+        <div className="grid gap-16 md:grid-cols-3 md:gap-0">
+          {tiers.map((t, i) => (
             <div
               key={t.title}
               className={cn(
-                "flex flex-col gap-6 rounded-[28px] border p-8",
-                t.highlight
-                  ? "border-brand-blue bg-gradient-to-b from-white to-brand-blue/[0.06] ring-1 ring-brand-blue"
-                  : "border-brand-blue/10 bg-white",
+                "flex flex-col h-full",
+                i === 0 && "md:pr-8 lg:pr-12",
+                i === 1 && "md:border-l md:border-slate-200 md:px-8 lg:px-12",
+                i === 2 && "md:border-l md:border-slate-200 md:pl-8 lg:pl-12"
               )}
             >
-              <span className="w-fit rounded-full bg-brand-navy/5 px-3 py-1 text-sm text-brand-navy">{t.tag}</span>
-              <div className="flex flex-col gap-3">
-                <h3 className="font-heading text-2xl font-semibold leading-tight text-brand-ink">{t.title}</h3>
-                <p className="text-base font-medium text-brand-ink">{t.subtitle}</p>
-                <p className="text-sm leading-6 text-brand-ink/70">{t.body}</p>
+              <div className="flex flex-col items-start gap-8 flex-grow mb-10">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">{t.tag}</span>
+                
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-sans text-2xl font-extrabold leading-tight text-slate-900">{t.title}</h3>
+                  <p className="text-[15px] font-bold text-slate-900">{t.subtitle}</p>
+                  <p className="text-[15px] leading-relaxed text-slate-600 font-light">{t.body}</p>
+                </div>
+
+                <div className="flex flex-col gap-4 mt-4">
+                  <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-500">What we work through</h4>
+                  <ul className="flex flex-col gap-4">
+                    {t.points.map((p) => (
+                      <li key={p} className="flex items-start gap-3 text-[15px] leading-relaxed text-slate-600 font-light">
+                        <span className="mt-2.5 size-1 shrink-0 rounded-full bg-blue-600" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-4 rounded-2xl border border-brand-blue/10 p-5">
-                <h4 className="font-heading text-base font-semibold text-[#d27300]">What we work through</h4>
-                <ul className="flex flex-col gap-3">
-                  {t.points.map((p) => (
-                    <li key={p} className="flex items-start gap-3 text-sm leading-6 text-brand-ink/80">
-                      <Check className="mt-0.5 size-4 shrink-0 text-[#d27300]" strokeWidth={2.5} />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
+              <div className="mt-auto flex flex-col gap-6">
+                <p className={cn("flex items-center gap-2 text-sm text-slate-500", t.highlight && "font-medium text-slate-900")}>
+                  <Clock className="size-4 shrink-0" strokeWidth={1.5} />
+                  {t.footer}
+                </p>
+
+                <Link
+                  href={BOOK_CALL_HREF}
+                  className="bg-slate-900 text-white rounded-full px-8 py-4 text-sm font-bold tracking-[0.1em] uppercase hover:bg-blue-600 transition-all duration-300 w-fit"
+                >
+                  Book your call
+                </Link>
               </div>
-
-              <p
-                className={cn(
-                  "mt-auto flex items-center gap-2 text-sm text-[#5d6b2e]",
-                  t.highlight && "font-semibold",
-                )}
-              >
-                <Clock className="size-4 shrink-0" strokeWidth={2} />
-                {t.footer}
-              </p>
-
-              <Link
-                href={BOOK_CALL_HREF}
-                className="flex h-14 items-center justify-center gap-2 rounded-full bg-brand-navy px-8 text-sm font-semibold uppercase tracking-[0.25px] text-brand-bg transition-opacity hover:opacity-90"
-              >
-                Book your call <ArrowUpRight className="size-4" strokeWidth={2} />
-              </Link>
             </div>
           ))}
         </div>

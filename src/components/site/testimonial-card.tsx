@@ -12,26 +12,27 @@ export function TestimonialCard({ testimonial, className, style }: TestimonialCa
   return (
     <figure 
       className={cn(
-        "relative flex h-full w-[340px] sm:w-[480px] flex-col gap-8 rounded-[32px] p-8 sm:p-10",
-        "bg-white/5 border border-white/10 overflow-hidden select-none",
+        "relative flex h-full w-[340px] sm:w-[480px] flex-col gap-8 rounded-2xl p-8 md:p-12",
+        "bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden select-none",
         className
       )}
       style={style}
     >
-      {/* Oversized Background Quote Mark */}
-      <div 
-        className="absolute top-2 right-4 text-[160px] leading-none text-brand-blue/10 font-heading font-black pointer-events-none z-0"
+      {/* Oversized background quote mark — brightens on the focused/centered card, recedes on blurred side cards */}
+      <div
+        className="absolute top-2 right-4 text-[160px] leading-none text-brand-blue font-heading font-black pointer-events-none z-0 transition-opacity duration-[50ms] ease-linear"
+        style={{ opacity: `calc(var(--card-opacity, 1) * 0.1)` }}
         aria-hidden="true"
       >
         ”
       </div>
 
-      <blockquote className="relative z-10 flex-1 text-[15px] sm:text-[17px] leading-relaxed text-brand-bg/90 font-medium">
+      <blockquote className="relative z-10 flex-1 text-lg md:text-xl leading-relaxed text-slate-700 font-medium">
         &ldquo;{testimonial.quote}&rdquo;
       </blockquote>
       
       <div className="relative z-10 flex items-center gap-4 mt-auto">
-        <div className="relative size-14 sm:size-16 shrink-0 overflow-hidden rounded-full ring-2 ring-white/10 bg-brand-navy/50">
+        <div className="relative size-14 sm:size-16 shrink-0 overflow-hidden rounded-full ring-2 ring-slate-100 bg-slate-50">
           <Image 
             src={testimonial.image} 
             alt={testimonial.name} 
@@ -43,10 +44,10 @@ export function TestimonialCard({ testimonial, className, style }: TestimonialCa
           />
         </div>
         <figcaption className="flex min-w-0 flex-col gap-0.5 pt-1">
-          <span className="truncate text-[13px] sm:text-sm font-semibold uppercase tracking-[0.5px] text-brand-bg">
+          <span className="truncate text-[13px] sm:text-sm font-bold uppercase tracking-[0.5px] text-slate-900">
             {testimonial.name}
           </span>
-          <span className="line-clamp-2 text-[12px] sm:text-[13px] leading-relaxed text-brand-bg/60 pr-4">
+          <span className="line-clamp-2 text-sm leading-relaxed text-slate-500 pr-4">
             {testimonial.role}
           </span>
         </figcaption>

@@ -3,6 +3,7 @@
 // Desktop header nav (Insights intentionally lives in the footer + mobile only).
 export const mainNav = [
   { label: "Home", href: "/" },
+  { label: "Services", href: "/#services" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -10,16 +11,17 @@ export const mainNav = [
 // Mobile sheet nav — same as desktop plus Insights.
 export const mobileNav = [
   { label: "Home", href: "/" },
+  { label: "Services", href: "/#services" },
   { label: "About", href: "/about" },
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
 export const servicesNav = [
-  { label: "Executive Coaching", href: "/executive-coaching" },
-  { label: "Keynote Speaking", href: "/speaking" },
-  { label: "Emerging Leaders", href: "/emerging-leaders" },
-  { label: "Programs", href: "/programs" },
+  { label: "Private Advisory", href: "/#services" },
+  { label: "Strategic Keynotes", href: "/#services" },
+  { label: "Executive Accelerator", href: "/#services" },
+  { label: "Team Alignment & Offsites", href: "/#services" },
 ] as const;
 
 export const companyNav = [

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Poppins, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Playfair_Display, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { TRPCReactProvider } from "@/lib/trpc/client";
@@ -7,15 +7,16 @@ import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { getAppBaseUrl } from "@/lib/app-url";
 
-const heading = DM_Sans({
-  variable: "--font-heading",
+const sans = Plus_Jakarta_Sans({
+  variable: "--font-sans-var",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const body = Poppins({
-  variable: "--font-body",
+const serif = Playfair_Display({
+  variable: "--font-serif-var",
   subsets: ["latin"],
+  style: ["normal", "italic"],
   weight: ["400", "500", "600", "700"],
 });
 
@@ -78,9 +79,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${heading.variable} ${body.variable} ${geistMono.variable} h-full antialiased`}
+      className={`scroll-smooth ${sans.variable} ${serif.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col font-sans overflow-x-hidden">
         <NuqsAdapter>
           <TRPCReactProvider>{children}</TRPCReactProvider>
         </NuqsAdapter>

@@ -9,20 +9,20 @@ const moments = [
 
 export function CoachingMoments() {
   return (
-    <section className="bg-brand-bg">
-      <div className="mx-auto grid max-w-[1664px] gap-12 px-6 py-20 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-[128px] lg:py-[120px]">
-        <h2 className="font-heading text-4xl font-semibold leading-[1.1] tracking-[-0.5px] sm:text-5xl">
-          <span className="text-brand-blue">Most leaders</span>{" "}
-          <span className="text-brand-ink">come to me at one of these</span> <span className="text-brand-blue">moments</span>
-        </h2>
+    <section className="bg-transparent py-20 md:py-32">
+      <div className="mx-auto grid max-w-[1664px] gap-16 px-6 sm:px-8 lg:grid-cols-[1fr_1.5fr] lg:gap-24 lg:px-[128px]">
+        {/* Left Col: Sticky Headline */}
+        <div className="lg:sticky lg:top-32 lg:h-fit mb-12 lg:mb-0">
+          <h2 className="font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl text-slate-900">
+            Most leaders come to me at one of these <span className="font-serif italic font-normal text-blue-600">moments</span>
+          </h2>
+        </div>
 
-        <ul className="flex flex-col gap-4">
+        {/* Right Col: Naked List */}
+        <ul className="flex flex-col space-y-6">
           {moments.map((m) => (
-            <li key={m} className="flex items-center gap-4 rounded-full border border-brand-navy/15 bg-white px-6 py-4">
-              <span className="flex shrink-0 items-center rounded-full bg-[#d27300]/5 p-1.5">
-                <Check className="size-4 text-[#d27300]" strokeWidth={2.5} />
-              </span>
-              <span className="text-base text-brand-ink">{m}</span>
+            <li key={m} className="flex items-start border-l-2 border-blue-200 hover:border-blue-600 transition-colors pl-6 py-2">
+              <span className="text-lg text-slate-600 leading-relaxed">{m}</span>
             </li>
           ))}
         </ul>

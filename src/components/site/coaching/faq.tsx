@@ -36,37 +36,37 @@ const faqs: Faq[] = [
 
 export function CoachingFaq() {
   return (
-    <section className="bg-brand-bg">
-      <div className="mx-auto grid max-w-[1664px] gap-12 px-6 py-20 sm:px-8 lg:grid-cols-2 lg:items-start lg:gap-20 lg:px-[128px] lg:py-[120px]">
-        <div className="flex flex-col gap-10">
-          <h2 className="font-heading text-4xl font-semibold leading-[1.15] tracking-[-0.5px] sm:text-5xl">
-            <span className="text-brand-blue">Common questions</span> <span className="text-brand-ink">before leaders engage</span>
+    <section className="bg-transparent py-20 md:py-32">
+      <div className="mx-auto grid max-w-[1664px] gap-16 px-6 sm:px-8 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:gap-24 lg:px-[128px]">
+        <div className="flex flex-col gap-12 max-w-2xl">
+          <h2 className="font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl text-slate-900 mb-4">
+            Common questions before leaders <span className="font-serif italic font-normal text-blue-600">engage</span>
           </h2>
 
-          <Accordion defaultValue={["0"]} className="flex flex-col gap-4">
+          <Accordion defaultValue={["0"]} className="flex flex-col w-full">
             {faqs.map((f, i) => (
               <AccordionItem
                 key={f.q}
                 value={String(i)}
-                className="rounded-2xl border border-brand-blue/10 bg-white px-6 data-[panel-open]:border-brand-blue/40"
+                className="border-b border-slate-200 py-2"
               >
-                <AccordionTrigger className="font-heading text-base font-semibold text-brand-ink hover:no-underline">
+                <AccordionTrigger className="font-sans text-lg font-bold text-slate-900 hover:no-underline text-left">
                   {f.q}
                 </AccordionTrigger>
-                <AccordionContent className="text-sm leading-7 text-brand-ink/70">{f.a}</AccordionContent>
+                <AccordionContent className="text-lg text-slate-600 leading-relaxed pr-8 pt-2 pb-6">{f.a}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         </div>
 
-        <div className="lg:sticky lg:top-28">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-brand-navy/5">
+        <div className="lg:sticky lg:top-32 hidden lg:block">
+          <div className="relative aspect-[4/5] w-full">
             <Image
               src="/coaching/portrait.png"
               alt="Vajira Weerasekara"
               fill
               sizes="(max-width:1024px) 100vw, 45vw"
-              className="object-cover"
+              className="object-cover [mask-image:linear-gradient(to_left,black_60%,transparent_100%)]"
             />
           </div>
         </div>

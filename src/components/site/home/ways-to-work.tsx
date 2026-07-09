@@ -9,31 +9,40 @@ import { cn } from "@/lib/utils";
 const PROGRAMS = [
   {
     id: "coaching",
-    title: "Executive Coaching",
-    desc: "1:1 sessions for senior leaders",
+    title: "Private Advisory",
+    desc: "1:1 strategic partnership for founders and C-suite executives. Navigate high-stakes decisions, eliminate blind spots, and refine your operational edge.",
+    linkText: "Explore advisory \u2192",
+    linkHref: "#coaching",
   },
   {
     id: "keynotes",
-    title: "Keynote Speaking",
-    desc: "Practical insights for the AI era",
+    title: "Strategic Keynotes",
+    desc: "High-signal, zero-fluff presentations built for the AI era. Provocative insights that challenge conventional thinking and catalyze organizational momentum.",
+    linkText: "See speaking topics \u2192",
+    linkHref: "#keynotes",
   },
   {
     id: "emerging",
-    title: "Emerging Executives Program",
-    desc: "Transition to strategic leadership",
+    title: "Executive Accelerator",
+    desc: "The bridge from operational manager to strategic architect. An intensive, structured container designed to forge your next generation of high-potential leaders.",
+    linkText: "View program details \u2192",
+    linkHref: "#emerging",
   },
   {
     id: "leadership",
-    title: "Leadership Programs",
-    desc: "Align and reset your leadership team",
+    title: "Team Alignment & Offsites",
+    desc: "Reset, align, and execute. Custom-engineered offsites and workshops to transform fragmented groups into cohesive, high-velocity leadership teams.",
+    linkText: "Explore team programs \u2192",
+    linkHref: "#leadership",
   },
 ];
 
 export function WaysToWork() {
   const [inView, setInView] = useState(false);
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>("coaching");
   const [reduceMotion, setReduceMotion] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -73,12 +82,8 @@ export function WaysToWork() {
     };
   }, []);
 
-  // For reduced motion, elements are immediately visible and tags are expanded.
-  const showElements = inView || reduceMotion;
-  const parallaxRef = useRef<HTMLDivElement>(null);
-
   return (
-    <section id="services" ref={sectionRef} className="relative overflow-hidden bg-brand-navy scroll-mt-28">
+    <section id="services" ref={sectionRef} className="relative overflow-hidden bg-brand-navy scroll-mt-32">
       {/* Subtle Film Grain Texture */}
       <div 
         className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none mix-blend-screen"
@@ -87,14 +92,17 @@ export function WaysToWork() {
         }}
       />
 
-      <div className="relative mx-auto flex max-w-[1664px] flex-col gap-12 px-6 py-12 sm:px-8 lg:flex-row lg:items-center lg:gap-16 lg:px-[128px] lg:py-20 z-10">
-        {/* Left: Vajira image (enlarged, duotone, linear mask, parallax) */}
+      <div className="relative mx-auto flex max-w-[1664px] flex-col gap-12 px-6 py-12 sm:px-8 lg:flex-row lg:items-center lg:gap-20 lg:px-[128px] lg:py-28 z-10">
+        {/* Left: Vajira image (Cinematic Emergence) */}
         <div 
           className={cn(
-            "relative mx-auto aspect-[4/5] w-full max-w-[500px] shrink-0 lg:mx-0 lg:-ml-24 lg:max-w-[600px]",
+            "relative mx-auto w-full max-w-[480px] shrink-0 lg:mx-0 lg:-ml-12 lg:max-w-[550px] min-h-[600px] flex flex-col justify-end",
             !reduceMotion && !inView ? "opacity-0" : "animate-fade-in-up"
           )}
         >
+          {/* Studio Lighting */}
+          <div className="absolute top-0 -right-10 w-[80%] h-[80%] bg-blue-600/20 blur-[100px] rounded-full z-0 pointer-events-none" />
+
           {/* Connecting Thread (Desktop Only) */}
           <div className="absolute top-[40%] left-[80%] w-[300px] h-[80px] z-0 hidden lg:block overflow-visible pointer-events-none">
             <svg className="w-full h-full overflow-visible" viewBox="0 0 300 80" preserveAspectRatio="none">
@@ -108,35 +116,60 @@ export function WaysToWork() {
             </svg>
           </div>
 
-          {/* Photo with soft organic mask to completely eliminate hard edges */}
+          {/* Portrait Container with Heavy CSS Mask */}
           <div 
             ref={parallaxRef}
-            className="relative w-full h-full [mask-image:radial-gradient(closest-side,black_40%,transparent_100%)] -webkit-[mask-image:radial-gradient(closest-side,black_40%,transparent_100%)]"
+            className="relative w-full z-10"
+            style={{ 
+              WebkitMaskImage: "linear-gradient(to bottom, black 50%, transparent 100%)",
+              maskImage: "linear-gradient(to bottom, black 50%, transparent 100%)"
+            }}
           >
-            <div className="absolute inset-0 bg-brand-blue mix-blend-color opacity-30 z-10 pointer-events-none" />
             <Image
               src="/home/ways/Vajira_ways_to_work.png"
               alt="Vajira Weerasekera"
-              fill
+              width={600}
+              height={800}
               sizes="(max-width: 1024px) 100vw, 600px"
-              className="object-cover object-top mix-blend-luminosity opacity-85 contrast-125 grayscale"
+              className="w-full h-auto object-bottom opacity-90 contrast-110"
             />
+          </div>
+
+          {/* Floating Glass Badges */}
+          {/* Badge 1: Top Right */}
+          <div 
+            className="absolute top-[15%] right-0 lg:-right-12 z-20 flex items-center gap-2 backdrop-blur-md bg-white/5 border border-white/10 rounded-full px-4 py-2 shadow-xl animate-pulse"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-blue">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span className="text-sm font-medium text-white tracking-wide">30+ Years Leading</span>
+          </div>
+
+          {/* Badge 2: Bottom Left */}
+          <div 
+            className="absolute bottom-[30%] left-0 lg:-left-8 z-20 flex items-center gap-2.5 backdrop-blur-md bg-white/5 border border-white/10 rounded-full px-4 py-2 shadow-xl animate-pulse [animation-delay:1s]"
+          >
+            <div className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </div>
+            <span className="text-sm font-medium text-white tracking-wide">Microsoft & Red Hat</span>
           </div>
         </div>
 
-        {/* Right: heading + tag row + CTA */}
-        <div className="flex flex-col gap-10 relative z-10 w-full lg:max-w-2xl">
-          <h2 
+        {/* Right: heading + Premium Accordion + CTA */}
+        <div className="flex flex-col gap-12 relative z-10 w-full lg:max-w-2xl pt-8 lg:pt-0">
+          <h2
             className={cn(
-              "font-heading text-3xl font-semibold leading-tight tracking-[-0.5px] text-brand-bg sm:text-5xl antialiased",
+              "font-sans text-4xl font-bold leading-[1.15] tracking-tight text-white sm:text-[3.5rem] antialiased",
               !reduceMotion && !inView ? "opacity-0" : "animate-fade-in-up [animation-delay:150ms]"
             )}
           >
-            <span className="text-brand-bg/60">Ways to work with Vajira,</span>
-            <br /> from coaching to full leadership programs.
+            Ways to engage. Precision interventions for high-stakes <span className="font-serif italic font-normal text-brand-blue">leadership.</span>
           </h2>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col w-full border-t border-white/10">
             {PROGRAMS.map((program, index) => {
               const isExpanded = reduceMotion || expandedId === program.id;
               
@@ -146,28 +179,37 @@ export function WaysToWork() {
                   onMouseEnter={() => !reduceMotion && setExpandedId(program.id)}
                   onClick={() => !reduceMotion && setExpandedId(program.id)}
                   className={cn(
-                    "group cursor-pointer rounded-2xl border transition-all duration-250 ease-out overflow-hidden",
-                    isExpanded ? "border-brand-blue/40 bg-brand-blue/5" : "border-white/15 hover:border-white/25",
+                    "group cursor-pointer border-b border-white/10 py-6 transition-all duration-500 ease-out",
                     !reduceMotion && !inView ? "opacity-0" : "animate-fade-in-up"
                   )}
                   style={{ animationDelay: `${250 + (index * 60)}ms` }}
                 >
-                  <div className="px-6 py-4 flex flex-col gap-1">
-                    <span className={cn(
-                      "text-base font-medium transition-colors duration-250",
-                      isExpanded ? "text-brand-bg" : "text-brand-bg/80"
-                    )}>
-                      {program.title}
-                    </span>
-                    <div 
-                      className={cn(
-                        "grid transition-all duration-250 ease-out",
-                        isExpanded ? "grid-rows-[1fr] opacity-100 mt-1" : "grid-rows-[0fr] opacity-0"
-                      )}
-                    >
-                      <p className="overflow-hidden text-sm text-brand-bg/60">
-                        {program.desc}
-                      </p>
+                  <div className="flex items-center justify-between gap-4">
+                     <div className="flex items-center gap-6">
+                        <span className="font-sans text-sm font-semibold tracking-widest text-brand-blue">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <h3 className={cn(
+                          "text-2xl sm:text-3xl font-medium tracking-tight transition-colors duration-500",
+                          isExpanded ? "text-white" : "text-white/60 group-hover:text-white/90"
+                        )}
+                        >
+                          {program.title}
+                        </h3>
+                     </div>
+                  </div>
+                  <div 
+                    className={cn(
+                      "grid transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
+                      isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    )}
+                  >
+                    <div className="overflow-hidden pl-[3.25rem] sm:pl-[3.5rem]"> 
+                      <div className="pt-5 pb-2 flex flex-col gap-6">
+                        <p className="text-slate-400 text-lg leading-relaxed max-w-xl font-light">
+                          {program.desc}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -177,20 +219,19 @@ export function WaysToWork() {
 
           <div
             className={cn(
-              "mt-8 flex",
+              "mt-4 flex",
               !reduceMotion && !inView ? "opacity-0" : "animate-fade-in-up [animation-delay:550ms]"
             )}
           >
             <Link 
-              href="#book-a-call" 
+              href="/contact" 
               className={cn(
-                "group relative inline-flex w-fit items-center justify-center gap-2 rounded-full px-8 py-3.5 text-[15px] font-semibold text-brand-bg transition-all duration-200 ease-out",
-                "bg-brand-blue/20 motion-safe:animate-pulse-glow motion-reduce:animate-none motion-reduce:shadow-[0_0_15px_rgba(61,139,242,0.25)]",
-                "hover:bg-brand-blue hover:!shadow-[0_0_25px_4px_rgba(61,139,242,0.5)] hover:animate-none"
+                "group relative inline-flex w-fit items-center justify-center gap-3 rounded-full px-8 py-4 text-base font-semibold text-white transition-all duration-300 ease-out",
+                "bg-brand-blue hover:bg-[#2c75d3] hover:scale-[1.02] hover:shadow-[0_0_24px_-4px_rgba(61,139,242,0.6)]"
               )}
             >
               Book a discovery call
-              <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-[5px] motion-safe:animate-nudge-cta motion-reduce:animate-none group-hover:animate-none" strokeWidth={2} />
+              <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2} />
             </Link>
           </div>
         </div>
