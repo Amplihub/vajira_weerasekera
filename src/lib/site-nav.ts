@@ -4,6 +4,7 @@
 export const mainNav = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/#services" },
+  { label: "Executive Coaching", href: "/executive-coaching" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -12,6 +13,7 @@ export const mainNav = [
 export const mobileNav = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/#services" },
+  { label: "Executive Coaching", href: "/executive-coaching" },
   { label: "About", href: "/about" },
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
