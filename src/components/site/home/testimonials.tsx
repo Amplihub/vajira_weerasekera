@@ -172,30 +172,30 @@ export function Testimonials() {
   };
 
   return (
-    <section className="relative bg-white pt-24 pb-40 overflow-hidden">
+    <section className="relative bg-white pt-12 pb-12 md:pt-20 md:pb-20 mt-0 overflow-hidden">
 
 
       {/* Layer 3 & 2: Staggered Headline and Overlapping Glass Card */}
-      <div className="relative z-10 mx-auto max-w-[1664px] px-6 sm:px-8 lg:px-[128px] mb-32 md:mb-48">
+      <div className="relative z-10 mx-auto max-w-[1664px] px-6 sm:px-8 lg:px-[128px] pt-4 pb-8 md:pt-8 md:pb-12">
         <div className="max-w-4xl relative z-20 flex flex-col">
           {/* Layer 3: Staggered Headline */}
-          <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] flex flex-col">
+          <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold tracking-tight leading-[1.1] flex flex-col">
             <span className="text-slate-900 block">One architecture.</span>
             <span className="font-serif italic font-normal text-brand-blue block md:ml-32">Infinite scale.</span>
           </h2>
           
           {/* Layer 2: Editorial Feature Grid */}
-          <div className="relative z-10 max-w-3xl mt-12 md:mt-24 md:ml-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:items-center">
+          <div className="relative z-10 max-w-3xl mt-10 md:mt-16 md:ml-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:items-start">
             {/* Column 1: Summary & CTA */}
             <div className="flex flex-col gap-8">
               <p className="text-lg text-slate-500 leading-relaxed font-sans">
-                A single, battle-tested methodology applied across every engagement. From private advisory to full-scale organizational transformation.
+                I coach from experience, not theory. Over 30 years leading global teams as CTO at Microsoft and VP at Red Hat I've learned that performance follows clarity, energy, results and trust, not the other way round. Today I help boards, executives and emerging leaders build that same human edge in their own organisations.
               </p>
               <Link
-                href="/speaking"
+                href="/about"
                 className="group inline-flex items-center gap-2 text-brand-blue font-sans font-semibold w-fit transition-colors hover:text-blue-700"
               >
-                Explore the methodology
+                Read the full story
                 <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.5} />
               </Link>
             </div>
@@ -204,24 +204,52 @@ export function Testimonials() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
               <div className="border-l border-slate-200 pl-4 flex flex-col">
                 <span className="text-xs font-bold text-blue-600 mb-1">01</span>
-                <span className="text-slate-900 font-semibold font-sans">Strategic Clarity</span>
+                <span className="text-slate-900 font-semibold font-sans mb-1">Clarity</span>
+                <p className="text-sm text-slate-500 font-sans">Cut through ambiguity and give people a clear line of sight to what matters.</p>
               </div>
               <div className="border-l border-slate-200 pl-4 flex flex-col">
                 <span className="text-xs font-bold text-blue-600 mb-1">02</span>
-                <span className="text-slate-900 font-semibold font-sans">Relentless Execution</span>
+                <span className="text-slate-900 font-semibold font-sans mb-1">Energy</span>
+                <p className="text-sm text-slate-500 font-sans">Build environments that create momentum, not exhaustion.</p>
               </div>
               <div className="border-l border-slate-200 pl-4 flex flex-col">
                 <span className="text-xs font-bold text-blue-600 mb-1">03</span>
-                <span className="text-slate-900 font-semibold font-sans">Radical Alignment</span>
+                <span className="text-slate-900 font-semibold font-sans mb-1">Results</span>
+                <p className="text-sm text-slate-500 font-sans">Turn sound judgement and trust into performance that lasts.</p>
               </div>
               <div className="border-l border-slate-200 pl-4 flex flex-col">
                 <span className="text-xs font-bold text-blue-600 mb-1">04</span>
-                <span className="text-slate-900 font-semibold font-sans">Compounding Impact</span>
+                <span className="text-slate-900 font-semibold font-sans mb-1">Trust</span>
+                <p className="text-sm text-slate-500 font-sans">Create the psychological safety that lets people do their best work.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* AI-ERA LEADERSHIP SECTION */}
+      <section className="w-full max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-24 md:pt-12 md:pb-32">
+        {/* 2-Column Grid: Stacks on mobile, splits 50/50 on large screens */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+          
+          {/* Left Column: Headline */}
+          <div className="flex flex-col">
+            <h2 className="text-5xl md:text-6xl lg:text-[4rem] font-bold text-slate-900 tracking-tight leading-[1.05]">
+              The Human Edge:<br />
+              <span className="font-serif italic font-normal text-blue-600">the leadership advantage AI can't replace.</span>
+            </h2>
+          </div>
+
+          {/* Right Column: Body Text */}
+          {/* lg:pt-4 adds a slight top bump so the first line of the paragraph optically aligns with the top of the massive headline */}
+          <div className="flex flex-col pt-8 border-t border-slate-200 lg:pt-4 lg:border-t-0 lg:border-l lg:pl-10">
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">
+              Al can process information faster than any leader ever will. It can't build trust, read a room, or create the psychological safety that lets a team take risks and tell the truth. As Al reshapes how organisations work, the leaders who thrive won't be the ones with the most data they'll be the ones who bring clarity, judgement and human connection to decisions machines can't make.
+            </p>
+          </div>
+
+        </div>
+      </section>
 
       {/* The Testimonials Flow (Bottom) */}
       <div className="mx-auto flex flex-col gap-12 relative z-10">

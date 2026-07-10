@@ -12,31 +12,41 @@ interface PortfolioItem {
 
 const portfolioItems: PortfolioItem[] = [
   {
-    tag: "BOOK",
+    tag: "AUTHOR",
     title: "Motivating Mavericks",
-    description: "Unlocking unconventional talent. A framework for leading high-performers who break the standard mold.",
+    description: "Motivating Mavericks: The Secret to High-Performing Teams",
     imageSrc: "/about/work/motivating-mavericks.png",
     href: "#",
   },
   {
-    tag: "BOOK",
+    tag: "COMMUNITY",
     title: "Life of the Run",
-    description: "Leadership, community, and endurance. Lessons extracted from the ultra-marathon.",
+    description: "Ultra-marathon running as a leadership and community project",
     imageSrc: "/about/work/life-of-the-run.png",
     href: "#",
   },
   {
     tag: "CRAFT STUDIO",
     title: "Veritas Signature",
-    description: "Handcrafted writing instruments from rare timbers. Craftsmanship turned into opportunity for children in need.",
+    description: "Handcrafted writing instrument studio; proceeds support Let Kids Fly",
     imageSrc: "/about/work/veritas-signature.png",
     href: "#",
   },
+  {
+    tag: "FOUNDATION",
+    title: "Let Kids Fly",
+    description: "Let Kids Fly: Co-founded with wife Kali scholarships and education support for underprivileged children",
+    imageSrc: "/about/work/let-kids-fly.png",
+    href: "#",
+  }
 ];
 
 export function AboutLeadership() {
+  // Duplicate array for infinite scroll
+  const carouselItems = [...portfolioItems, ...portfolioItems];
+
   return (
-    <section className="relative overflow-hidden bg-white pb-32 pt-24 lg:pb-48 lg:pt-32">
+    <section className="relative overflow-hidden bg-white pb-16 pt-16 lg:pb-24 lg:pt-20">
       <div className="relative mx-auto flex max-w-7xl flex-col px-6 sm:px-8 lg:px-8">
         
         {/* Section Header */}
@@ -48,41 +58,46 @@ export function AboutLeadership() {
             Books, a craft studio, a foundation for children. Different shapes, same belief: we carry more potential than we&apos;re given room to use.
           </p>
         </div>
+      </div>
 
-        {/* Naked Portfolio Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mt-16 md:mt-24">
-          {portfolioItems.map((item, i) => (
-            <div key={i} className="flex flex-col group">
+      {/* Infinite Auto-Loop Carousel */}
+      <div className="mt-10 md:mt-12 w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] md:[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <div className="flex gap-4 md:gap-6 w-max animate-marquee hover:[animation-play-state:paused] active:[animation-play-state:paused] focus-within:[animation-play-state:paused] py-4">
+          {carouselItems.map((item, i) => (
+            <div key={i} className="flex-none w-[80vw] sm:w-[280px] md:w-[300px] lg:w-[340px] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group">
               {/* Image Wrapper */}
-              <Link href={item.href} className="aspect-[4/5] relative w-full overflow-hidden rounded-2xl shadow-xl shadow-slate-200/50 cursor-pointer block">
+              <Link href={item.href} className="relative w-full h-40 sm:h-48 md:h-56 bg-slate-100 cursor-pointer block">
                 <Image
                   src={item.imageSrc}
                   alt={item.title}
                   fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  sizes="(max-width: 640px) 80vw, (max-width: 768px) 280px, (max-width: 1024px) 300px, 340px"
                 />
               </Link>
               
-              {/* Meta Tag */}
-              <span className="text-xs font-semibold tracking-widest uppercase text-slate-400 mt-8 mb-2">
-                {item.tag}
-              </span>
-              
-              {/* Title */}
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">
-                {item.title}
-              </h3>
-              
-              {/* Description */}
-              <p className="text-slate-600 leading-relaxed text-sm md:text-base flex-grow">
-                {item.description}
-              </p>
-              
-              {/* Link */}
-              <Link href={item.href} className="inline-flex items-center text-sm font-bold text-blue-600 mt-6 group-hover:translate-x-2 transition-transform duration-300 w-fit">
-                Explore <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+              {/* Text Area */}
+              <div className="p-4 md:p-5 flex flex-col flex-grow">
+                {/* Meta Tag */}
+                <span className="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-2">
+                  {item.tag}
+                </span>
+                
+                {/* Title */}
+                <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2">
+                  {item.title}
+                </h3>
+                
+                {/* Description */}
+                <p className="text-slate-600 leading-relaxed text-sm flex-grow">
+                  {item.description}
+                </p>
+                
+                {/* Link */}
+                <Link href={item.href} className="inline-flex items-center text-sm font-bold text-blue-600 mt-4 group-hover:translate-x-1 transition-transform duration-300 w-fit">
+                  Explore <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
             </div>
           ))}
         </div>

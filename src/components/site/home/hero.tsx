@@ -34,13 +34,13 @@ export function HomeHero() {
           <h1 className="opacity-0 animate-fade-in-up text-[2.6rem] leading-[1.1] sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-slate-900 [animation-delay:200ms]">
             Master the noise. Lead{" "}
             <span className="whitespace-nowrap">with{" "}
-              <span className="font-serif italic font-normal text-blue-600">precision.</span>
+              <span className="font-serif italic font-normal text-blue-600">Clarity.</span>
             </span>
           </h1>
           
           {/* Subtext */}
           <p className="mt-8 max-w-xl opacity-0 animate-fade-in-up text-lg md:text-xl text-slate-600 leading-relaxed [animation-delay:300ms]">
-            The higher you climb, the less room there is for error. Strip away the operational chaos and focus purely on the strategic moves that actually drive growth.
+            Executive coaching, keynotes and leadership programs for leaders navigating complexity, change built on 30 years leading global teams at Microsoft and Red Hat. and the age of Al
           </p>
           
           {/* Actions */}

@@ -5,6 +5,7 @@ import { FinalCta } from "@/components/site/home/final-cta";
 import { BOOK_CALL_HREF } from "@/lib/site-nav";
 import Link from "next/link";
 import Image from "next/image";
+import { Briefcase, Brain, GraduationCap, Book, HeartHandshake, Activity } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About — Vajira Weerasekera",
@@ -67,6 +68,67 @@ export default function AboutPage() {
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Career Highlights Section */}
+      <section className="w-full max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          
+          {/* Card 1: Career */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-start text-left">
+            <Briefcase className="w-8 h-8 text-blue-600 mb-6" />
+            <h3 className="text-xl font-bold text-slate-900 mb-3">Career</h3>
+            <p className="text-base text-slate-600 leading-relaxed">
+              CTO, Microsoft Services Asia; VP, Office of Technology, Red Hat - led 400+ specialists across 14 countries
+            </p>
+          </div>
+
+          {/* Card 2: AI Leadership */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-start text-left">
+            <Brain className="w-8 h-8 text-blue-600 mb-6" />
+            <h3 className="text-xl font-bold text-slate-900 mb-3">AI Leadership</h3>
+            <p className="text-base text-slate-600 leading-relaxed">
+              Established Red Hat&apos;s first Al team in Asia Pacific
+            </p>
+          </div>
+
+          {/* Card 3: Education */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-start text-left">
+            <GraduationCap className="w-8 h-8 text-blue-600 mb-6" />
+            <h3 className="text-xl font-bold text-slate-900 mb-3">Education</h3>
+            <p className="text-base text-slate-600 leading-relaxed">
+              Harvard Business School — Program for Leadership Development & General Management Program
+            </p>
+          </div>
+
+          {/* Card 4: Author */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-start text-left">
+            <Book className="w-8 h-8 text-blue-600 mb-6" />
+            <h3 className="text-xl font-bold text-slate-900 mb-3">Author</h3>
+            <p className="text-base text-slate-600 leading-relaxed">
+              Motivating Mavericks: The Secret to High-Performing Teams
+            </p>
+          </div>
+
+          {/* Card 5: Let Kids Fly */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-start text-left">
+            <HeartHandshake className="w-8 h-8 text-blue-600 mb-6" />
+            <h3 className="text-xl font-bold text-slate-900 mb-3">Let Kids Fly</h3>
+            <p className="text-base text-slate-600 leading-relaxed">
+              Co-founded with wife Kali scholarships and education support for underprivileged children
+            </p>
+          </div>
+
+          {/* Card 6: Run for Life */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-start text-left">
+            <Activity className="w-8 h-8 text-blue-600 mb-6" />
+            <h3 className="text-xl font-bold text-slate-900 mb-3">Run for Life</h3>
+            <p className="text-base text-slate-600 leading-relaxed">
+              Ultra-marathon running as a leadership and community project
+            </p>
+          </div>
+
         </div>
       </section>
 

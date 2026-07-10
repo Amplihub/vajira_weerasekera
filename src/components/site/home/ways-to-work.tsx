@@ -9,29 +9,29 @@ import { cn } from "@/lib/utils";
 const PROGRAMS = [
   {
     id: "coaching",
-    title: "Private Advisory",
-    desc: "1:1 strategic partnership for founders and C-suite executives. Navigate high-stakes decisions, eliminate blind spots, and refine your operational edge.",
+    title: "Executive Coaching (1:1)",
+    desc: "One-on-one coaching for senior leaders navigating high-stakes decisions, transitions, or team performance challenges.",
     linkText: "Explore advisory \u2192",
     linkHref: "#coaching",
   },
   {
     id: "keynotes",
     title: "Strategic Keynotes",
-    desc: "High-signal, zero-fluff presentations built for the AI era. Provocative insights that challenge conventional thinking and catalyze organizational momentum.",
+    desc: "Keynote talks on human-centred leadership, psychological safety and leading through the AI era built for conferences, offsites and leadership summits.",
     linkText: "See speaking topics \u2192",
     linkHref: "#keynotes",
   },
   {
     id: "emerging",
-    title: "Executive Accelerator",
-    desc: "The bridge from operational manager to strategic architect. An intensive, structured container designed to forge your next generation of high-potential leaders.",
+    title: "Emerging Leaders Program",
+    desc: "A structured program helping high-potential leaders build the judgement, clarity and presence to step into bigger roles.",
     linkText: "View program details \u2192",
     linkHref: "#emerging",
   },
   {
     id: "leadership",
-    title: "Team Alignment & Offsites",
-    desc: "Reset, align, and execute. Custom-engineered offsites and workshops to transform fragmented groups into cohesive, high-velocity leadership teams.",
+    title: "Executive Offsites",
+    desc: "Facilitated offsites that align leadership teams around a shared framework for decision-making, trust and performance.",
     linkText: "Explore team programs \u2192",
     linkHref: "#leadership",
   },
@@ -83,7 +83,7 @@ export function WaysToWork() {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="relative overflow-hidden bg-brand-navy scroll-mt-32">
+    <section id="services" ref={sectionRef} className="relative overflow-hidden bg-brand-navy scroll-mt-32 pt-16 pb-16 md:pt-24 md:pb-24 mb-0">
       {/* Subtle Film Grain Texture */}
       <div 
         className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none mix-blend-screen"
@@ -92,7 +92,7 @@ export function WaysToWork() {
         }}
       />
 
-      <div className="relative mx-auto flex max-w-[1664px] flex-col gap-12 px-6 py-12 sm:px-8 lg:flex-row lg:items-center lg:gap-20 lg:px-[128px] lg:py-28 z-10">
+      <div className="relative mx-auto flex max-w-[1664px] flex-col gap-12 px-6 sm:px-8 lg:flex-row lg:items-center lg:gap-20 lg:px-[128px] z-10">
         {/* Left: Vajira image (Cinematic Emergence) */}
         <div 
           className={cn(
