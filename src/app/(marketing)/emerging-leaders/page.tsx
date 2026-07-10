@@ -79,28 +79,31 @@ export default function EmergingLeadersPage() {
               <Link href="/contact" className="bg-slate-900 hover:bg-slate-800 text-white rounded-full px-8 py-3.5 font-semibold transition-all inline-flex items-center justify-center">
                 Book your call
               </Link>
-              <Link href="#modules" className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 rounded-full px-8 py-3.5 font-semibold transition-all inline-flex items-center justify-center">
+              <a href="#learn" className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 rounded-full px-8 py-3.5 font-semibold transition-all inline-flex items-center justify-center">
                 View program modules
-              </Link>
+              </a>
             </div>
           </div>
 
           {/* Right Column: Hero Image with Fluid Circular Mask */}
           <div className="relative flex justify-center lg:justify-end items-center mt-12 lg:mt-0 w-full">
-            {/* Concentric Decorative Rings */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] aspect-square rounded-full border border-slate-200/50" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] aspect-square rounded-full border border-slate-200" />
-            
-            {/* Fluid Circle Container */}
-            <div className="relative w-full max-w-[400px] lg:max-w-[500px] aspect-square rounded-full overflow-hidden [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] bg-slate-100">
-              <Image
-                src="/home/emerging-image.png"
-                alt="Emerging Leaders Program"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 500px"
-                className="object-cover object-top"
-              />
+            {/* Image and Rings Wrapper */}
+            <div className="relative w-full max-w-[400px] lg:max-w-[500px] aspect-square">
+              {/* Concentric Decorative Rings */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] aspect-square rounded-full border border-slate-200/50" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] aspect-square rounded-full border border-slate-200" />
+              
+              {/* Fluid Circle Container */}
+              <div className="relative w-full h-full rounded-full overflow-hidden">
+                <Image
+                  src="/home/emerging-image.png"
+                  alt="Emerging Leaders Program"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 500px"
+                  className="object-cover object-top"
+                />
+              </div>
             </div>
           </div>
 
@@ -142,7 +145,7 @@ export default function EmergingLeadersPage() {
           </div>
 
           {/* What you'll learn */}
-          <div className="flex flex-col gap-2">
+          <div id="learn" className="flex flex-col gap-2 scroll-mt-28">
             <div className="flex flex-col gap-2 text-center md:text-left">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight mb-8">What you&apos;ll learn</h2>
               <p className="text-lg text-slate-600 -mt-6 mb-8">Six concrete capabilities - built on your real situations, not case studies.</p>
@@ -174,7 +177,7 @@ export default function EmergingLeadersPage() {
           </div>
           
           <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-            <Accordion type="single" collapsible className="w-full">
+            <Accordion className="w-full">
               {modules.map((m, i) => (
                 <AccordionItem
                   key={m.title}

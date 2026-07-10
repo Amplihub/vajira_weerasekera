@@ -53,9 +53,9 @@ export default function ProgramsPage() {
               Twelve weeks from now, you&apos;ve moved out of the doing and into leading, with the judgment and presence the next role expects you to have.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row pt-4">
-              <Link href="#programs" className="bg-slate-900 hover:bg-slate-800 text-white rounded-full px-8 py-3.5 font-semibold transition-all inline-flex items-center justify-center">
+              <a href="#programs" className="bg-slate-900 hover:bg-slate-800 text-white rounded-full px-8 py-3.5 font-semibold transition-all inline-flex items-center justify-center">
                 View available programs
-              </Link>
+              </a>
               <Link href="/contact" className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 rounded-full px-8 py-3.5 font-semibold transition-all inline-flex items-center justify-center">
                 Book your call
               </Link>
@@ -64,20 +64,23 @@ export default function ProgramsPage() {
 
           {/* Right Column: Hero Image with Fluid Circular Mask */}
           <div className="relative flex justify-center lg:justify-end items-center mt-12 lg:mt-0 w-full">
-            {/* Concentric Decorative Rings */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] aspect-square rounded-full border border-slate-200/50" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] aspect-square rounded-full border border-slate-200" />
-            
-            {/* Fluid Circle Container */}
-            <div className="relative w-full max-w-[400px] lg:max-w-[500px] aspect-square rounded-full overflow-hidden [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] bg-slate-100">
-              <Image
-                src="/home/programs-portrait.png"
-                alt="Leadership Programs"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 500px"
-                className="object-cover object-top"
-              />
+            {/* Image and Rings Wrapper */}
+            <div className="relative w-full max-w-[400px] lg:max-w-[500px] aspect-square">
+              {/* Concentric Decorative Rings */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] aspect-square rounded-full border border-slate-200/50" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] aspect-square rounded-full border border-slate-200" />
+              
+              {/* Fluid Circle Container */}
+              <div className="relative w-full h-full rounded-full overflow-hidden">
+                <Image
+                  src="/home/programs-portrait.png"
+                  alt="Leadership Programs"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 500px"
+                  className="object-cover object-top"
+                />
+              </div>
             </div>
           </div>
 
