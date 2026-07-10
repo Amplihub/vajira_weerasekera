@@ -12,28 +12,28 @@ const PROGRAMS = [
     title: "Executive Coaching (1:1)",
     desc: "One-on-one coaching for senior leaders navigating high-stakes decisions, transitions, or team performance challenges.",
     linkText: "Explore advisory \u2192",
-    linkHref: "#coaching",
+    linkHref: "/executive-coaching",
   },
   {
     id: "keynotes",
     title: "Strategic Keynotes",
     desc: "Keynote talks on human-centred leadership, psychological safety and leading through the AI era built for conferences, offsites and leadership summits.",
     linkText: "See speaking topics \u2192",
-    linkHref: "#keynotes",
+    linkHref: "/speaking",
   },
   {
     id: "emerging",
     title: "Emerging Leaders Program",
     desc: "A structured program helping high-potential leaders build the judgement, clarity and presence to step into bigger roles.",
     linkText: "View program details \u2192",
-    linkHref: "#emerging",
+    linkHref: "/emerging-leaders",
   },
   {
     id: "leadership",
     title: "Executive Offsites",
     desc: "Facilitated offsites that align leadership teams around a shared framework for decision-making, trust and performance.",
     linkText: "Explore team programs \u2192",
-    linkHref: "#leadership",
+    linkHref: "/programs",
   },
 ];
 
@@ -205,10 +205,16 @@ export function WaysToWork() {
                     )}
                   >
                     <div className="overflow-hidden pl-[3.25rem] sm:pl-[3.5rem]"> 
-                      <div className="pt-5 pb-2 flex flex-col gap-6">
+                      <div className="pt-5 pb-2 flex flex-col gap-4">
                         <p className="text-slate-400 text-lg leading-relaxed max-w-xl font-light">
                           {program.desc}
                         </p>
+                        <Link 
+                          href={program.linkHref}
+                          className="inline-flex items-center text-sm font-bold text-brand-blue hover:text-white transition-colors duration-300 w-fit"
+                        >
+                          {program.linkText}
+                        </Link>
                       </div>
                     </div>
                   </div>

@@ -71,6 +71,42 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Leadership in the AI Era Story Section */}
+      <section className="w-full max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          
+          {/* Left Column (Image) */}
+          <div className="relative w-full aspect-[4/3] lg:aspect-square rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+            <Image
+              src="/about/leadership-portrait.png"
+              alt="Vajira Weerasekera leadership"
+              fill
+              className="object-cover w-full h-full"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+
+          {/* Right Column (Text) */}
+          <div className="flex flex-col">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-6">
+              Leadership in the AI era,<br />
+              <span className="text-blue-600 font-serif italic font-normal">learned the long way</span>
+            </h2>
+            
+            <div className="space-y-6">
+              <p className="text-lg text-slate-600 leading-relaxed">
+                For more than 30 years, Vajira Weerasekera led the teams making high-stakes calls. Former Microsoft CTO - Asia Services. Former Red Hat VP - Asia Office of Technology. He ran organisations of 400+ specialists across 14 countries, originated and closed multi-million-dollar enterprise engagements, and built new business capabilities from the ground up. He also built Red Hat&apos;s first AI team in Asia Pacific, helping global organisations bring artificial intelligence into their work responsibly.
+              </p>
+              
+              <p className="text-lg text-slate-600 leading-relaxed">
+                Three decades of those calls taught him something. AI raises the stakes on human judgement. It does not replace it. The calls that hold up under pressure come from leaders who built the right environment long before the pressure arrived.
+              </p>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
       {/* Career Highlights Section */}
       <section className="w-full max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
