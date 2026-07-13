@@ -78,7 +78,7 @@ export default function AboutPage() {
           {/* Left Column (Image) */}
           <div className="relative w-full aspect-[4/3] lg:aspect-square rounded-2xl overflow-hidden shadow-lg border border-slate-100">
             <Image
-              src="/about/leadership-portrait.png"
+              src="/about/Leadership_about.jpg"
               alt="Vajira Weerasekera leadership"
               fill
               className="object-cover w-full h-full"
